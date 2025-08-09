@@ -196,9 +196,9 @@
     @apply w-full px-5 py-4 rounded-2xl border border-apple-gray-200 bg-apple-white/95 backdrop-blur-sm text-apple-black placeholder:text-apple-gray-400 focus:ring-2 focus:ring-apple-accent-blue focus:border-apple-accent-blue transition-all duration-300 shadow-apple hover:shadow-apple-md focus:shadow-apple-lg;
   }
 
-  /* Social Icons */
+  /* Social Icons - Fixed: removed group from @apply */
   .social-icon {
-    @apply w-12 h-12 bg-apple-gray-100/60 backdrop-blur-sm hover:bg-apple-accent-blue/10 rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-apple-md group border border-apple-gray-200/60;
+    @apply w-12 h-12 bg-apple-gray-100/60 backdrop-blur-sm hover:bg-apple-accent-blue/10 rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-apple-md border border-apple-gray-200/60;
   }
 
   /* Link Hover Effects */
