@@ -5,6 +5,7 @@ import ChappHero from '../components/ChappHero';
 import ChappAbout from '../components/ChappAbout';
 import ChappServices from '../components/ChappServices';
 import ChappContactForm from '../components/ChappContactForm';
+import ChappFooter from '../components/ChappFooter';
 
 const Index = () => {
   useEffect(() => {
@@ -36,6 +37,7 @@ const Index = () => {
       <ChappAbout />
       <ChappServices />
       <ChappContactForm />
+      <ChappFooter />
     </div>
   );
 };

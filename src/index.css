@@ -25,7 +25,7 @@
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 64%;
 
-    --accent: 220 100% 55%;
+    --accent: 212 95% 54%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
@@ -33,7 +33,7 @@
 
     --border: 0 0% 15%;
     --input: 0 0% 15%;
-    --ring: 220 100% 55%;
+    --ring: 212 95% 54%;
 
     --radius: 0.75rem;
 
@@ -44,7 +44,7 @@
     --sidebar-accent: 0 0% 15%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 220 100% 55%;
+    --sidebar-ring: 212 95% 54%;
   }
 }
 
@@ -80,11 +80,11 @@
   }
 
   .btn-chapp-accent {
-    @apply inline-flex items-center justify-center px-8 py-4 bg-chapp-accent-blue text-chapp-white font-medium rounded-2xl text-body-lg hover:bg-blue-600 active:bg-blue-700 transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue focus:ring-2 focus:ring-chapp-accent-blue focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-chapp-md;
+    @apply inline-flex items-center justify-center px-8 py-4 bg-chapp-accent-blue text-chapp-white font-medium rounded-2xl text-body-lg hover:bg-chapp-accent-blue-dark active:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue focus:ring-2 focus:ring-chapp-accent-blue focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-chapp-md;
   }
 
   .btn-chapp-small {
-    @apply inline-flex items-center justify-center px-6 py-3 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-blue-600 active:bg-blue-700 transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue focus:ring-2 focus:ring-chapp-accent-blue focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-chapp;
+    @apply inline-flex items-center justify-center px-6 py-3 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-chapp-accent-blue-dark active:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue focus:ring-2 focus:ring-chapp-accent-blue focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-chapp;
   }
 
   .btn-chapp-ghost {
@@ -123,19 +123,19 @@
 
   /* Layout Variants - Enhanced Padding */
   .section-chapp {
-    @apply py-24 sm:py-32 px-6 sm:px-8 lg:px-20;
+    @apply py-24 sm:py-32;
   }
 
   .section-chapp-sm {
-    @apply py-16 sm:py-20 px-6 sm:px-8 lg:px-20;
+    @apply py-16 sm:py-20;
   }
 
   .container-chapp {
-    @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-20;
+    @apply max-w-7xl mx-auto;
   }
 
   .container-chapp-narrow {
-    @apply max-w-4xl mx-auto px-6 sm:px-8 lg:px-20;
+    @apply max-w-4xl mx-auto;
   }
 
   /* Dark Glassmorphism Effect */
@@ -163,10 +163,6 @@
 
   .hover-glow-blue {
     @apply transition-all duration-300 hover:shadow-glow-blue;
-  }
-
-  .hover-glow-purple {
-    @apply transition-all duration-300 hover:shadow-glow-purple;
   }
 
   /* Form Styles - Dark Mode */

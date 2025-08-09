@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -63,7 +62,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Dark mode premium color palette
+				// Dark mode premium color palette with elegant blue tones
 				chapp: {
 					black: 'hsl(0 0% 5%)',
 					'dark-bg': 'hsl(0 0% 7%)',
@@ -80,8 +79,9 @@ export default {
 					'gray-700': 'hsl(0 0% 30%)',
 					'gray-800': 'hsl(0 0% 20%)',
 					'gray-900': 'hsl(0 0% 10%)',
-					'accent-blue': 'hsl(220 100% 55%)',
-					'accent-purple': 'hsl(260 100% 65%)',
+					'accent-blue': 'hsl(212 95% 54%)',
+					'accent-blue-dark': 'hsl(210 100% 40%)',
+					'accent-blue-light': 'hsl(210 95% 65%)',
 					'night-blue': 'hsl(220 30% 18%)'
 				}
 			},
@@ -126,13 +126,14 @@ export default {
 				'chapp-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3)',
 				'chapp-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4)',
 				'glass-dark': '0 8px 32px 0 rgba(0, 0, 0, 0.6)',
-				'glow-blue': '0 0 20px rgba(59, 130, 246, 0.4)',
-				'glow-purple': '0 0 20px rgba(147, 51, 234, 0.4)'
+				'glow-blue': '0 0 20px rgba(33, 150, 243, 0.4)',
+				'glow-blue-strong': '0 0 30px rgba(33, 150, 243, 0.6)'
 			},
 			backgroundImage: {
 				'gradient-dark': 'linear-gradient(135deg, hsl(0 0% 7%) 0%, hsl(0 0% 5%) 100%)',
 				'gradient-glass-dark': 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
-				'gradient-hero-dark': 'linear-gradient(135deg, hsl(0 0% 7%) 0%, hsl(220 30% 8%) 100%)'
+				'gradient-hero-dark': 'linear-gradient(135deg, hsl(0 0% 7%) 0%, hsl(220 30% 8%) 100%)',
+				'gradient-blue-elegant': 'linear-gradient(135deg, hsl(210 100% 40%) 0%, hsl(212 95% 54%) 100%)'
 			},
 			backdropBlur: {
 				'xs': '2px'

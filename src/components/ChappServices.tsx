@@ -1,63 +1,63 @@
 
 import React from 'react';
 import { 
-  TrendingUp, 
-  Users, 
-  Target, 
-  Lightbulb, 
+  Monitor, 
+  Database, 
   BarChart3, 
-  Cog,
+  Cloud, 
+  Smartphone, 
+  Settings,
   ArrowRight 
 } from 'lucide-react';
 
 const ChappServices = () => {
   const services = [
     {
-      icon: TrendingUp,
-      title: 'Strategia Aziendale',
-      description: 'Sviluppiamo strategie personalizzate per accelerare la crescita del tuo business e ottimizzare i processi operativi.',
-      features: ['Analisi SWOT', 'Piano strategico', 'KPI e metriche'],
+      icon: Monitor,
+      title: 'Web-App Personalizzate',
+      description: 'Sviluppiamo applicazioni web moderne, responsive e scalabili utilizzando le tecnologie più avanzate del mercato.',
+      features: ['React/Next.js', 'UI/UX Design', 'Performance ottimali'],
       color: 'from-blue-500 to-blue-600'
     },
     {
-      icon: Users,
-      title: 'Gestione del Cambiamento',
-      description: 'Accompagniamo la tua organizzazione attraverso processi di trasformazione digitale e culturale.',
-      features: ['Change management', 'Formazione team', 'Cultura aziendale'],
+      icon: Database,
+      title: 'Business Intelligence',
+      description: 'Piattaforme BI complete per trasformare i tuoi dati in insights strategici e dashboard interattive.',
+      features: ['Dashboard real-time', 'Analisi predittiva', 'Data visualization'],
       color: 'from-emerald-500 to-emerald-600'
     },
     {
-      icon: Target,
-      title: 'Marketing & Vendite',
-      description: 'Ottimizziamo le tue strategie di marketing e vendita per massimizzare il ROI e la customer satisfaction.',
-      features: ['Marketing strategy', 'Sales funnel', 'Customer journey'],
+      icon: BarChart3,
+      title: 'Analytics Avanzate',
+      description: 'Sistemi di reportistica avanzata e KPI monitoring per decisioni data-driven efficaci.',
+      features: ['Metriche personalizzate', 'Report automatici', 'Alert intelligenti'],
       color: 'from-purple-500 to-purple-600'
     },
     {
-      icon: Lightbulb,
-      title: 'Innovazione & R&D',
-      description: 'Stimoliamo l\'innovazione nella tua azienda attraverso metodologie agili e approcci creativi.',
-      features: ['Design thinking', 'Prototipazione', 'Innovation lab'],
+      icon: Cloud,
+      title: 'Cloud Solutions',
+      description: 'Migrazione e gestione di infrastrutture cloud scalabili e sicure per le tue applicazioni.',
+      features: ['AWS/Azure/GCP', 'Microservizi', 'DevOps automation'],
       color: 'from-amber-500 to-amber-600'
     },
     {
-      icon: BarChart3,
-      title: 'Business Intelligence',
-      description: 'Trasformiamo i tuoi dati in insights strategici per decisioni informate e competitive.',
-      features: ['Data analysis', 'Dashboard', 'Reporting avanzato'],
+      icon: Smartphone,
+      title: 'Mobile-First Design',
+      description: 'Progettazione mobile-first per garantire un\'esperienza utente ottimale su tutti i dispositivi.',
+      features: ['Responsive design', 'PWA development', 'Cross-platform'],
       color: 'from-rose-500 to-rose-600'
     },
     {
-      icon: Cog,
-      title: 'Ottimizzazione Processi',
-      description: 'Miglioriamo l\'efficienza operativa attraverso l\'analisi e la reingegnerizzazione dei processi.',
-      features: ['Process mapping', 'Lean management', 'Automazione'],
+      icon: Settings,
+      title: 'Integrazione Sistemi',
+      description: 'Integrazione seamless tra sistemi esistenti, API development e automazione dei processi.',
+      features: ['API REST/GraphQL', 'Webhook automation', 'Database sync'],
       color: 'from-indigo-500 to-indigo-600'
     }
   ];
 
   return (
-    <section id="services" className="section-chapp bg-chapp-dark-card/30">
+    <section id="services" className="section-chapp bg-chapp-dark-card/30 px-6 sm:px-8 lg:px-20">
       <div className="container-chapp">
         {/* Header */}
         <div className="text-center mb-20">
@@ -66,11 +66,11 @@ const ChappServices = () => {
           </div>
           <h2 className="text-display-md text-chapp-title mb-6">
             Soluzioni Complete per{' '}
-            <span className="bg-gradient-to-r from-chapp-accent-blue to-chapp-accent-purple bg-clip-text text-transparent">Ogni Esigenza</span>
+            <span className="bg-gradient-blue-elegant bg-clip-text text-transparent">Web-App e Business Intelligence</span>
           </h2>
           <p className="text-body-xl text-chapp-body max-w-3xl mx-auto">
-            Offriamo una gamma completa di servizi di consulenza strategica, 
-            progettati per trasformare le sfide in opportunità di crescita sostenibile.
+            Offriamo servizi specializzati nello sviluppo di piattaforme web avanzate e 
+            sistemi di Business Intelligence, progettati per trasformare il tuo business digitale.
           </p>
         </div>
 
@@ -118,13 +118,13 @@ const ChappServices = () => {
 
         {/* Bottom CTA */}
         <div className="text-center">
-          <div className="bg-gradient-to-br from-chapp-accent-blue to-chapp-accent-purple rounded-3xl p-12 text-center shadow-chapp-xl">
+          <div className="bg-gradient-blue-elegant rounded-3xl p-12 text-center shadow-chapp-xl">
             <h3 className="text-heading-xl text-chapp-white mb-4">
-              Hai bisogno di una consulenza personalizzata?
+              Hai un progetto web o BI in mente?
             </h3>
             <p className="text-body-lg text-chapp-white/90 mb-8 max-w-2xl mx-auto">
-              I nostri esperti sono pronti ad analizzare le tue esigenze specifiche 
-              e proporti la soluzione più adatta al tuo business.
+              I nostri sviluppatori e data analyst sono pronti ad analizzare le tue esigenze 
+              e proporti la soluzione tecnologica più adatta al tuo business.
             </p>
             <button className="btn-chapp-secondary hover-glow-blue">
               Prenota una Consulenza Gratuita

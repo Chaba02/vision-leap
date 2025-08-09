@@ -68,7 +68,7 @@ const ChappContactForm = () => {
   };
 
   return (
-    <section id="contact" className="section-chapp bg-chapp-dark-bg">
+    <section id="contact" className="section-chapp bg-chapp-dark-bg px-6 sm:px-8 lg:px-20">
       <div className="container-chapp-narrow">
         {/* Header */}
         <div className="text-center mb-16">
@@ -77,13 +77,13 @@ const ChappContactForm = () => {
           </div>
           <h2 className="text-display-md text-chapp-title mb-6">
             Inizia il Tuo{' '}
-            <span className="bg-gradient-to-r from-chapp-accent-blue to-chapp-accent-purple bg-clip-text text-transparent">
-              Percorso di Crescita
+            <span className="bg-gradient-blue-elegant bg-clip-text text-transparent">
+              Progetto Digitale
             </span>
           </h2>
           <p className="text-body-xl text-chapp-body max-w-2xl mx-auto">
             Contattaci per una consulenza gratuita e personalizzata. 
-            Il nostro team di esperti è pronto ad analizzare le tue esigenze.
+            Il nostro team di esperti è pronto ad analizzare le tue esigenze tecnologiche.
           </p>
         </div>
 
@@ -181,7 +181,7 @@ const ChappContactForm = () => {
                 value={formData.message}
                 onChange={handleChange}
                 className={`form-textarea-chapp ${errors.message ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
-                placeholder="Descrivi le tue esigenze e come possiamo aiutarti a raggiungere i tuoi obiettivi..."
+                placeholder="Descrivi il tuo progetto web o le tue esigenze di Business Intelligence..."
               />
               {errors.message && (
                 <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
