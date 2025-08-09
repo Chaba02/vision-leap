@@ -6,14 +6,14 @@ import AppleAbout from '../components/AppleAbout';
 import AppleServices from '../components/AppleServices';
 import AppleTestimonials from '../components/AppleTestimonials';
 import ContactForm from '../components/ContactForm';
-import Footer from '../components/Footer';
+import AppleFooter from '../components/AppleFooter';
 
 const Index = () => {
   useEffect(() => {
-    // Intersection Observer per le animazioni scroll
+    // Enhanced Intersection Observer for scroll animations
     const observerOptions = {
       threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      rootMargin: '0px 0px -80px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -24,7 +24,7 @@ const Index = () => {
       });
     }, observerOptions);
 
-    // Osserva tutti gli elementi con classe animate-on-scroll
+    // Observe all elements with animate-on-scroll class
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     animatedElements.forEach((el) => observer.observe(el));
 
@@ -32,14 +32,14 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-apple-white">
+    <div className="min-h-screen bg-apple-white overflow-x-hidden">
       <AppleNavbar />
       <AppleHero />
       <AppleAbout />
       <AppleServices />
       <AppleTestimonials />
       <ContactForm />
-      <Footer />
+      <AppleFooter />
     </div>
   );
 };

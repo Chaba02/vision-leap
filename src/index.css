@@ -100,26 +100,30 @@
 
 /* Apple-inspired Component Variants */
 @layer components {
-  /* Button Variants */
+  /* Button Variants - Enhanced */
   .btn-apple-primary {
-    @apply inline-flex items-center justify-center px-8 py-3.5 bg-apple-black text-apple-white font-medium rounded-full text-body-lg hover:bg-apple-gray-800 active:bg-apple-gray-900 transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-apple-gray-500 focus:ring-offset-2 shadow-apple;
+    @apply inline-flex items-center justify-center px-8 py-4 bg-apple-black text-apple-white font-medium rounded-2xl text-body-lg hover:bg-apple-gray-800 active:bg-apple-gray-900 transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-apple-gray-500 focus:ring-offset-2 shadow-apple-md hover:shadow-apple-lg;
   }
 
   .btn-apple-secondary {
-    @apply inline-flex items-center justify-center px-8 py-3.5 bg-transparent text-apple-black border-2 border-apple-black font-medium rounded-full text-body-lg hover:bg-apple-black hover:text-apple-white active:bg-apple-gray-800 transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-apple-gray-500 focus:ring-offset-2;
+    @apply inline-flex items-center justify-center px-8 py-4 bg-transparent text-apple-black border-2 border-apple-black font-medium rounded-2xl text-body-lg hover:bg-apple-black hover:text-apple-white active:bg-apple-gray-800 transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-apple-gray-500 focus:ring-offset-2 shadow-apple;
   }
 
   .btn-apple-ghost {
-    @apply inline-flex items-center justify-center px-6 py-3 text-apple-gray-700 font-medium text-body-lg hover:text-apple-black hover:bg-apple-gray-50 rounded-xl transition-all duration-300 focus:ring-2 focus:ring-apple-gray-200 focus:ring-offset-2;
+    @apply inline-flex items-center justify-center px-6 py-3 text-apple-gray-700 font-medium text-body-lg hover:text-apple-black hover:bg-apple-gray-50 rounded-xl transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-apple-gray-200 focus:ring-offset-2;
   }
 
-  /* Card Variants */
+  /* Card Variants - Enhanced */
   .card-apple {
-    @apply bg-apple-white rounded-3xl shadow-apple-lg border border-apple-gray-100 overflow-hidden transition-all duration-500 hover:shadow-apple-xl hover:-translate-y-1;
+    @apply bg-apple-white/95 backdrop-blur-xl rounded-3xl shadow-apple-lg border border-apple-gray-100/60 overflow-hidden transition-all duration-500 hover:shadow-apple-xl hover:-translate-y-2 hover:scale-[1.02] hover:bg-apple-white;
   }
 
   .card-glass {
-    @apply bg-apple-white/80 backdrop-blur-md rounded-3xl shadow-glass border border-apple-white/20 overflow-hidden;
+    @apply bg-apple-white/70 backdrop-blur-xl rounded-3xl shadow-glass border border-apple-white/30 overflow-hidden transition-all duration-500 hover:bg-apple-white/80 hover:shadow-apple-xl hover:-translate-y-1 hover:scale-[1.02];
+  }
+
+  .card-premium {
+    @apply bg-gradient-to-br from-apple-white via-apple-gray-50 to-apple-white rounded-3xl shadow-apple-lg border border-apple-gray-100/80 overflow-hidden transition-all duration-500 hover:shadow-apple-xl hover:-translate-y-2 hover:scale-[1.02] hover:from-apple-white hover:via-apple-white hover:to-apple-white;
   }
 
   /* Text Variants */
@@ -139,30 +143,30 @@
     @apply text-apple-gray-500 font-medium;
   }
 
-  /* Layout Variants */
+  /* Layout Variants - Enhanced Padding */
   .section-apple {
-    @apply py-24 sm:py-32 px-4 sm:px-6 lg:px-8;
+    @apply py-24 sm:py-32 px-6 sm:px-8 lg:px-20;
   }
 
   .section-apple-sm {
-    @apply py-16 sm:py-20 px-4 sm:px-6 lg:px-8;
+    @apply py-16 sm:py-20 px-6 sm:px-8 lg:px-20;
   }
 
   .container-apple {
-    @apply max-w-7xl mx-auto;
+    @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-20;
   }
 
   .container-apple-narrow {
-    @apply max-w-4xl mx-auto;
+    @apply max-w-4xl mx-auto px-6 sm:px-8 lg:px-20;
   }
 
-  /* Glassmorphism Effect */
+  /* Glassmorphism Effect - Enhanced */
   .glass {
-    @apply bg-apple-white/70 backdrop-blur-xl border border-apple-white/20;
+    @apply bg-apple-white/75 backdrop-blur-xl border border-apple-white/25 shadow-glass;
   }
 
   .glass-dark {
-    @apply bg-apple-black/70 backdrop-blur-xl border border-apple-white/10;
+    @apply bg-apple-black/75 backdrop-blur-xl border border-apple-white/15 shadow-glass;
   }
 
   /* Animation Classes */
@@ -174,40 +178,67 @@
     @apply opacity-100 translate-y-0;
   }
 
-  /* Hover Effects */
+  /* Hover Effects - Enhanced */
   .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-apple-xl;
+    @apply transition-all duration-500 hover:-translate-y-3 hover:shadow-apple-xl;
   }
 
   .hover-scale {
     @apply transition-transform duration-300 hover:scale-[1.02];
   }
 
-  /* Form Styles */
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-glow;
+  }
+
+  /* Form Styles - Enhanced */
   .form-apple {
-    @apply w-full px-4 py-3.5 rounded-xl border border-apple-gray-200 bg-apple-white text-apple-black placeholder:text-apple-gray-400 focus:ring-2 focus:ring-apple-accent-blue focus:border-apple-accent-blue transition-all duration-200 shadow-apple;
+    @apply w-full px-5 py-4 rounded-2xl border border-apple-gray-200 bg-apple-white/95 backdrop-blur-sm text-apple-black placeholder:text-apple-gray-400 focus:ring-2 focus:ring-apple-accent-blue focus:border-apple-accent-blue transition-all duration-300 shadow-apple hover:shadow-apple-md focus:shadow-apple-lg;
+  }
+
+  /* Social Icons */
+  .social-icon {
+    @apply w-12 h-12 bg-apple-gray-100/60 backdrop-blur-sm hover:bg-apple-accent-blue/10 rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-apple-md group border border-apple-gray-200/60;
+  }
+
+  /* Link Hover Effects */
+  .link-hover {
+    @apply relative transition-colors duration-300 hover:text-apple-accent-blue;
+  }
+
+  .link-hover::after {
+    @apply absolute -bottom-0.5 left-0 w-0 h-0.5 bg-apple-accent-blue transition-all duration-300;
+    content: '';
+  }
+
+  .link-hover:hover::after {
+    @apply w-full;
   }
 }
 
-/* Scrollbar Styling */
+/* Enhanced Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: theme('colors.apple.gray-100');
+  @apply bg-apple-gray-50;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: theme('colors.apple.gray-300');
-  border-radius: 3px;
+  @apply bg-apple-gray-300 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: theme('colors.apple.gray-400');
+  @apply bg-apple-gray-400;
 }
 
 /* Smooth transitions for all interactive elements */
 a, button, [role="button"] {
   @apply transition-all duration-300;
+}
+
+/* Enhanced focus styles */
+*:focus-visible {
+  @apply ring-2 ring-apple-accent-blue ring-offset-2 ring-offset-apple-white outline-none;
 }

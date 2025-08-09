@@ -7,7 +7,8 @@ import {
   Lightbulb, 
   BarChart3, 
   Cog,
-  ArrowUpRight 
+  ArrowUpRight,
+  Sparkles
 } from 'lucide-react';
 
 const AppleServices = () => {
@@ -61,16 +62,18 @@ const AppleServices = () => {
       <div className="container-apple">
         {/* Header */}
         <div className="text-center mb-20 animate-on-scroll">
-          <div className="inline-flex items-center gap-2 bg-apple-gray-100 text-apple-gray-600 px-4 py-2 rounded-full text-body-md font-medium mb-6">
+          <div className="inline-flex items-center gap-2 bg-apple-gray-100/80 backdrop-blur-sm text-apple-gray-600 px-4 py-2 rounded-full text-body-md font-medium mb-8 shadow-apple border border-apple-gray-200/60">
+            <Sparkles size={16} className="text-apple-accent-blue" />
             I Nostri Servizi
           </div>
-          <h2 className="text-display-lg text-apple-title mb-6">
+          <h2 className="text-display-lg text-apple-title mb-8 leading-tight">
             Soluzioni{' '}
             <span className="bg-gradient-to-r from-apple-night-blue to-apple-accent-blue bg-clip-text text-transparent">
-              Su Misura
-            </span>
+              su misura
+            </span>{' '}
+            per il tuo business
           </h2>
-          <p className="text-body-xl text-apple-body max-w-3xl mx-auto">
+          <p className="text-body-xl text-apple-body max-w-3xl mx-auto leading-relaxed">
             Offriamo una gamma completa di servizi progettati per trasformare 
             le sfide in opportunità di crescita concrete e misurabili.
           </p>
@@ -81,35 +84,37 @@ const AppleServices = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="card-apple p-8 group hover-lift animate-on-scroll"
+              className="card-premium p-8 hover-lift animate-on-scroll group"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Icon */}
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${service.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-apple-md`}>
+              <div className={`w-16 h-16 rounded-3xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-6 shadow-apple-md group-hover:shadow-apple-lg group-hover:scale-110 transition-all duration-500`}>
                 <service.icon className="text-white" size={24} />
               </div>
 
               {/* Content */}
-              <h3 className="text-heading-lg text-apple-title mb-4">
-                {service.title}
-              </h3>
-              <p className="text-body-lg text-apple-body mb-6 leading-relaxed">
-                {service.description}
-              </p>
+              <div className="space-y-4 mb-8">
+                <h3 className="text-heading-lg text-apple-title font-semibold">
+                  {service.title}
+                </h3>
+                <p className="text-body-lg text-apple-body leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
 
               {/* Features */}
-              <ul className="space-y-2 mb-8">
+              <ul className="space-y-3 mb-8">
                 {service.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center text-body-md text-apple-body">
-                    <div className="w-1.5 h-1.5 bg-apple-accent-blue rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-apple-accent-blue rounded-full mr-3 flex-shrink-0"></div>
                     {feature}
                   </li>
                 ))}
               </ul>
 
               {/* CTA */}
-              <button className="btn-apple-ghost group/btn w-full justify-between flex items-center">
-                Scopri di più
+              <button className="btn-apple-ghost group/btn w-full justify-between flex items-center hover-scale">
+                <span>Scopri di più</span>
                 <ArrowUpRight size={16} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
               </button>
             </div>
@@ -118,17 +123,24 @@ const AppleServices = () => {
 
         {/* Bottom CTA */}
         <div className="text-center animate-on-scroll">
-          <div className="card-glass p-12 max-w-4xl mx-auto">
-            <h3 className="text-display-md text-apple-title mb-6">
-              Hai un progetto in mente?
-            </h3>
-            <p className="text-body-xl text-apple-body mb-8 max-w-2xl mx-auto">
-              I nostri consulenti sono pronti ad analizzare le tue esigenze 
-              e proporti la soluzione più efficace per il tuo business.
-            </p>
-            <button className="btn-apple-primary">
-              Consulenza Gratuita
-            </button>
+          <div className="card-glass p-12 lg:p-16 max-w-4xl mx-auto hover-lift">
+            <div className="space-y-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-apple-night-blue to-apple-accent-blue rounded-3xl flex items-center justify-center shadow-apple-lg mx-auto">
+                <Sparkles className="text-apple-white" size={24} />
+              </div>
+              <h3 className="text-display-md text-apple-title font-semibold leading-tight">
+                Hai un progetto in mente?
+              </h3>
+              <p className="text-body-xl text-apple-body max-w-2xl mx-auto leading-relaxed">
+                I nostri consulenti sono pronti ad analizzare le tue esigenze 
+                e proporti la soluzione più efficace per il tuo business.
+              </p>
+              <div className="pt-4">
+                <button className="btn-apple-primary hover-scale">
+                  Consulenza Gratuita
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
