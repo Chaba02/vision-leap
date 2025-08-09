@@ -4,87 +4,77 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Design System - Corporate Consulting Colors */
+/* Apple-inspired Design System */
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 7%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 7%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 7%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 0 0% 7%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 7%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 7%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 7%;
 
     --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-foreground: 0 0% 25%;
+    --sidebar-primary: 0 0% 7%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-
-    /* Corporate Theme Colors */
-    --corporate-blue: 224 76% 48%;
-    --corporate-blue-light: 224 76% 65%;
-    --corporate-blue-dark: 224 76% 35%;
-    --corporate-gray: 215 16% 47%;
-    --corporate-gray-light: 215 16% 92%;
-    --corporate-gray-dark: 215 16% 25%;
-    --corporate-white: 0 0% 100%;
-    --corporate-accent-gold: 45 93% 58%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 7%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 212 100% 50%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --background: 0 0% 7%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 82%;
+    --sidebar-background: 0 0% 9%;
+    --sidebar-foreground: 0 0% 82%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 9%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 212 100% 50%;
   }
 }
 
@@ -94,62 +84,85 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-apple-white text-apple-gray-900 font-sans antialiased;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 
   html {
     scroll-behavior: smooth;
   }
+
+  /* Apple-style selection */
+  ::selection {
+    @apply bg-apple-accent-blue/20;
+  }
 }
 
-/* Corporate Component Variants */
+/* Apple-inspired Component Variants */
 @layer components {
   /* Button Variants */
-  .btn-corporate-primary {
-    @apply bg-gradient-corporate text-corporate-white font-semibold px-8 py-4 rounded-xl shadow-medium hover:shadow-strong transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-corporate-blue focus:ring-offset-2;
+  .btn-apple-primary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-apple-black text-apple-white font-medium rounded-full text-body-lg hover:bg-apple-gray-800 active:bg-apple-gray-900 transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-apple-gray-500 focus:ring-offset-2 shadow-apple;
   }
 
-  .btn-corporate-secondary {
-    @apply bg-corporate-white text-corporate-blue border-2 border-corporate-blue font-semibold px-8 py-4 rounded-xl shadow-soft hover:bg-corporate-blue hover:text-corporate-white transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-corporate-blue focus:ring-offset-2;
+  .btn-apple-secondary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-transparent text-apple-black border-2 border-apple-black font-medium rounded-full text-body-lg hover:bg-apple-black hover:text-apple-white active:bg-apple-gray-800 transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-apple-gray-500 focus:ring-offset-2;
   }
 
-  .btn-corporate-ghost {
-    @apply text-corporate-blue font-semibold px-6 py-3 rounded-lg hover:bg-corporate-blue/10 transition-all duration-300 focus:ring-2 focus:ring-corporate-blue focus:ring-offset-2;
+  .btn-apple-ghost {
+    @apply inline-flex items-center justify-center px-6 py-3 text-apple-gray-700 font-medium text-body-lg hover:text-apple-black hover:bg-apple-gray-50 rounded-xl transition-all duration-300 focus:ring-2 focus:ring-apple-gray-200 focus:ring-offset-2;
   }
 
   /* Card Variants */
-  .card-service {
-    @apply bg-corporate-white p-8 rounded-3xl shadow-soft border border-corporate-gray-light/20 hover:shadow-medium transition-all duration-300 hover:-translate-y-1;
+  .card-apple {
+    @apply bg-apple-white rounded-3xl shadow-apple-lg border border-apple-gray-100 overflow-hidden transition-all duration-500 hover:shadow-apple-xl hover:-translate-y-1;
   }
 
-  .card-testimonial {
-    @apply bg-gradient-subtle p-8 rounded-2xl shadow-soft border border-corporate-gray-light/30 relative overflow-hidden;
+  .card-glass {
+    @apply bg-apple-white/80 backdrop-blur-md rounded-3xl shadow-glass border border-apple-white/20 overflow-hidden;
   }
 
   /* Text Variants */
-  .text-display {
-    @apply font-display font-bold tracking-tight;
+  .text-apple-hero {
+    @apply font-display font-semibold tracking-tight text-apple-black;
   }
 
-  .text-heading {
-    @apply font-semibold text-corporate-gray-dark;
+  .text-apple-title {
+    @apply font-display font-semibold text-apple-black;
   }
 
-  .text-body {
-    @apply text-corporate-gray leading-relaxed;
+  .text-apple-body {
+    @apply text-apple-gray-600 leading-relaxed;
   }
 
-  .text-caption {
-    @apply text-corporate-gray text-body-sm font-medium;
+  .text-apple-caption {
+    @apply text-apple-gray-500 font-medium;
   }
 
   /* Layout Variants */
-  .section-padding {
-    @apply py-24 px-4 sm:px-6 lg:px-8;
+  .section-apple {
+    @apply py-24 sm:py-32 px-4 sm:px-6 lg:px-8;
   }
 
-  .container-corporate {
+  .section-apple-sm {
+    @apply py-16 sm:py-20 px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-apple {
     @apply max-w-7xl mx-auto;
+  }
+
+  .container-apple-narrow {
+    @apply max-w-4xl mx-auto;
+  }
+
+  /* Glassmorphism Effect */
+  .glass {
+    @apply bg-apple-white/70 backdrop-blur-xl border border-apple-white/20;
+  }
+
+  .glass-dark {
+    @apply bg-apple-black/70 backdrop-blur-xl border border-apple-white/10;
   }
 
   /* Animation Classes */
@@ -161,18 +174,18 @@
     @apply opacity-100 translate-y-0;
   }
 
-  /* Gradient Overlays */
-  .gradient-overlay {
-    @apply absolute inset-0 bg-gradient-to-r from-corporate-blue-dark/80 to-corporate-blue/60;
+  /* Hover Effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-apple-xl;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-[1.02];
   }
 
   /* Form Styles */
-  .form-input {
-    @apply w-full px-4 py-3 rounded-xl border border-corporate-gray-light bg-corporate-white text-corporate-gray-dark placeholder:text-corporate-gray focus:ring-2 focus:ring-corporate-blue focus:border-corporate-blue transition-all duration-200;
-  }
-
-  .form-textarea {
-    @apply w-full px-4 py-3 rounded-xl border border-corporate-gray-light bg-corporate-white text-corporate-gray-dark placeholder:text-corporate-gray focus:ring-2 focus:ring-corporate-blue focus:border-corporate-blue transition-all duration-200 resize-none;
+  .form-apple {
+    @apply w-full px-4 py-3.5 rounded-xl border border-apple-gray-200 bg-apple-white text-apple-black placeholder:text-apple-gray-400 focus:ring-2 focus:ring-apple-accent-blue focus:border-apple-accent-blue transition-all duration-200 shadow-apple;
   }
 }
 
@@ -182,14 +195,19 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--corporate-gray-light));
+  background: theme('colors.apple.gray-100');
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--corporate-blue));
+  background: theme('colors.apple.gray-300');
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--corporate-blue-dark));
+  background: theme('colors.apple.gray-400');
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, [role="button"] {
+  @apply transition-all duration-300;
 }

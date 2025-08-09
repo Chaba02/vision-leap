@@ -1,8 +1,10 @@
 
 import React, { useEffect } from 'react';
-import Navbar from '../components/Navbar';
-import HeroSection from '../components/HeroSection';
-import ServicesSection from '../components/ServicesSection';
+import AppleNavbar from '../components/AppleNavbar';
+import AppleHero from '../components/AppleHero';
+import AppleAbout from '../components/AppleAbout';
+import AppleServices from '../components/AppleServices';
+import AppleTestimonials from '../components/AppleTestimonials';
 import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
 
@@ -30,10 +32,12 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <HeroSection />
-      <ServicesSection />
+    <div className="min-h-screen bg-apple-white">
+      <AppleNavbar />
+      <AppleHero />
+      <AppleAbout />
+      <AppleServices />
+      <AppleTestimonials />
       <ContactForm />
       <Footer />
     </div>
