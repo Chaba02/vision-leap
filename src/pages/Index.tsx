@@ -1,12 +1,10 @@
 
 import React, { useEffect } from 'react';
-import AppleNavbar from '../components/AppleNavbar';
-import AppleHero from '../components/AppleHero';
-import AppleAbout from '../components/AppleAbout';
-import AppleServices from '../components/AppleServices';
-import AppleTestimonials from '../components/AppleTestimonials';
-import ContactForm from '../components/ContactForm';
-import AppleFooter from '../components/AppleFooter';
+import ChappNavbar from '../components/ChappNavbar';
+import ChappHero from '../components/ChappHero';
+import ChappAbout from '../components/ChappAbout';
+import ChappServices from '../components/ChappServices';
+import ChappContactForm from '../components/ChappContactForm';
 
 const Index = () => {
   useEffect(() => {
@@ -32,14 +30,12 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-apple-white overflow-x-hidden">
-      <AppleNavbar />
-      <AppleHero />
-      <AppleAbout />
-      <AppleServices />
-      <AppleTestimonials />
-      <ContactForm />
-      <AppleFooter />
+    <div className="min-h-screen bg-chapp-dark-bg overflow-x-hidden">
+      <ChappNavbar />
+      <ChappHero />
+      <ChappAbout />
+      <ChappServices />
+      <ChappContactForm />
     </div>
   );
 };

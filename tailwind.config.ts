@@ -63,23 +63,26 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Apple-inspired color palette
-				apple: {
+				// Dark mode premium color palette
+				chapp: {
+					black: 'hsl(0 0% 5%)',
+					'dark-bg': 'hsl(0 0% 7%)',
+					'dark-card': 'hsl(0 0% 10%)',
+					'dark-border': 'hsl(0 0% 15%)',
 					white: 'hsl(0 0% 100%)',
-					black: 'hsl(0 0% 7%)',
-					'gray-50': 'hsl(0 0% 98%)',
-					'gray-100': 'hsl(0 0% 96%)',
-					'gray-200': 'hsl(0 0% 90%)',
-					'gray-300': 'hsl(0 0% 82%)',
-					'gray-400': 'hsl(0 0% 64%)',
-					'gray-500': 'hsl(0 0% 45%)',
-					'gray-600': 'hsl(0 0% 32%)',
-					'gray-700': 'hsl(0 0% 25%)',
-					'gray-800': 'hsl(0 0% 15%)',
-					'gray-900': 'hsl(0 0% 9%)',
-					'night-blue': 'hsl(220 30% 18%)',
-					'silver': 'hsl(220 9% 46%)',
-					'accent-blue': 'hsl(212 100% 50%)'
+					'gray-50': 'hsl(0 0% 95%)',
+					'gray-100': 'hsl(0 0% 90%)',
+					'gray-200': 'hsl(0 0% 80%)',
+					'gray-300': 'hsl(0 0% 70%)',
+					'gray-400': 'hsl(0 0% 60%)',
+					'gray-500': 'hsl(0 0% 50%)',
+					'gray-600': 'hsl(0 0% 40%)',
+					'gray-700': 'hsl(0 0% 30%)',
+					'gray-800': 'hsl(0 0% 20%)',
+					'gray-900': 'hsl(0 0% 10%)',
+					'accent-blue': 'hsl(220 100% 55%)',
+					'accent-purple': 'hsl(260 100% 65%)',
+					'night-blue': 'hsl(220 30% 18%)'
 				}
 			},
 			fontFamily: {
@@ -87,7 +90,7 @@ export default {
 				display: ['"SF Pro Display"', 'Inter', '"Helvetica Neue"', 'system-ui', 'sans-serif']
 			},
 			fontSize: {
-				// Apple-style typography scale
+				// Premium typography scale
 				'hero': ['4.5rem', { lineHeight: '1.05', letterSpacing: '-0.025em', fontWeight: '600' }],
 				'hero-sm': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '600' }],
 				'display-xl': ['3.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '600' }],
@@ -118,17 +121,18 @@ export default {
 				'4xl': '2rem'
 			},
 			boxShadow: {
-				'apple': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-				'apple-md': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-				'apple-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-				'apple-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-				'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-				'glow': '0 0 20px rgba(212, 100, 50, 0.3)'
+				'chapp': '0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2)',
+				'chapp-md': '0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2)',
+				'chapp-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3)',
+				'chapp-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4)',
+				'glass-dark': '0 8px 32px 0 rgba(0, 0, 0, 0.6)',
+				'glow-blue': '0 0 20px rgba(59, 130, 246, 0.4)',
+				'glow-purple': '0 0 20px rgba(147, 51, 234, 0.4)'
 			},
 			backgroundImage: {
-				'gradient-subtle': 'linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(0 0% 98%) 100%)',
-				'gradient-glass': 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
-				'gradient-hero': 'linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(220 9% 98%) 100%)'
+				'gradient-dark': 'linear-gradient(135deg, hsl(0 0% 7%) 0%, hsl(0 0% 5%) 100%)',
+				'gradient-glass-dark': 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
+				'gradient-hero-dark': 'linear-gradient(135deg, hsl(0 0% 7%) 0%, hsl(220 30% 8%) 100%)'
 			},
 			backdropBlur: {
 				'xs': '2px'
