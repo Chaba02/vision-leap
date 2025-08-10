@@ -119,7 +119,7 @@ const AppleInteractivePreview = () => {
                   <span className="text-gray-500 w-8">2</span>
                   <span className="text-blue-400">const</span>
                   <span className="text-yellow-300 ml-2">Dashboard</span>
-                  <span className="text-white ml-1">= () => {</span>
+                  <span className="text-white ml-1">= () =&gt; {'{'};</span>
                 </div>
                 <div className="flex">
                   <span className="text-gray-500 w-8">3</span>
