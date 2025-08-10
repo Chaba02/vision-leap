@@ -62,7 +62,6 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Dark mode premium color palette with elegant blue tones
 				chapp: {
 					black: 'hsl(0 0% 5%)',
 					'dark-bg': 'hsl(0 0% 7%)',
@@ -79,10 +78,13 @@ export default {
 					'gray-700': 'hsl(0 0% 30%)',
 					'gray-800': 'hsl(0 0% 20%)',
 					'gray-900': 'hsl(0 0% 10%)',
-					'accent-blue': 'hsl(212 95% 54%)',
-					'accent-blue-dark': 'hsl(210 100% 40%)',
-					'accent-blue-light': 'hsl(210 95% 65%)',
-					'night-blue': 'hsl(220 30% 18%)'
+					'accent-blue': 'hsl(217 91% 60%)',
+					'accent-blue-dark': 'hsl(215 89% 45%)',
+					'accent-blue-light': 'hsl(220 95% 70%)',
+					'accent-blue-vivid': 'hsl(214 100% 65%)',
+					'night-blue': 'hsl(220 30% 18%)',
+					title: 'hsl(0 0% 95%)',
+					body: 'hsl(0 0% 75%)'
 				}
 			},
 			fontFamily: {
@@ -93,6 +95,7 @@ export default {
 				// Premium typography scale
 				'hero': ['4.5rem', { lineHeight: '1.05', letterSpacing: '-0.025em', fontWeight: '600' }],
 				'hero-sm': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '600' }],
+				'hero-xs': ['2.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '600' }],
 				'display-xl': ['3.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '600' }],
 				'display-lg': ['2.75rem', { lineHeight: '1.15', letterSpacing: '-0.015em', fontWeight: '600' }],
 				'display-md': ['2.25rem', { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '600' }],
@@ -126,14 +129,16 @@ export default {
 				'chapp-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3)',
 				'chapp-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4)',
 				'glass-dark': '0 8px 32px 0 rgba(0, 0, 0, 0.6)',
-				'glow-blue': '0 0 20px rgba(33, 150, 243, 0.4)',
-				'glow-blue-strong': '0 0 30px rgba(33, 150, 243, 0.6)'
+				'glow-blue': '0 0 20px rgba(59, 130, 246, 0.5)',
+				'glow-blue-strong': '0 0 30px rgba(59, 130, 246, 0.7)'
 			},
 			backgroundImage: {
 				'gradient-dark': 'linear-gradient(135deg, hsl(0 0% 7%) 0%, hsl(0 0% 5%) 100%)',
 				'gradient-glass-dark': 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
-				'gradient-hero-dark': 'linear-gradient(135deg, hsl(0 0% 7%) 0%, hsl(220 30% 8%) 100%)',
-				'gradient-blue-elegant': 'linear-gradient(135deg, hsl(210 100% 40%) 0%, hsl(212 95% 54%) 100%)'
+				'gradient-hero-dark': 'linear-gradient(135deg, hsl(0 0% 7%) 0%, hsl(217 45% 12%) 50%, hsl(0 0% 7%) 100%)',
+				'gradient-hero-vivid': 'linear-gradient(135deg, hsl(220 30% 8%) 0%, hsl(217 60% 15%) 30%, hsl(214 70% 18%) 70%, hsl(220 30% 8%) 100%)',
+				'gradient-blue-elegant': 'linear-gradient(135deg, hsl(215 89% 45%) 0%, hsl(217 91% 60%) 50%, hsl(220 95% 70%) 100%)',
+				'gradient-blue-vivid': 'linear-gradient(135deg, hsl(214 100% 50%) 0%, hsl(217 91% 60%) 50%, hsl(220 95% 70%) 100%)'
 			},
 			backdropBlur: {
 				'xs': '2px'
