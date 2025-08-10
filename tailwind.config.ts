@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -178,6 +179,9 @@ export default {
 				'scale-in': 'scale-in 0.3s ease-out',
 				'float': 'float 6s ease-in-out infinite',
 				'glow': 'glow 2s ease-in-out infinite'
+			},
+			zIndex: {
+				'60': '60'
 			}
 		}
 	},

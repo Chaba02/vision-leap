@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import ChappNavbar from '../components/ChappNavbar';
 import ChappHero from '../components/ChappHero';
 import ChappAbout from '../components/ChappAbout';
+import ChappInteractivePreview from '../components/ChappInteractivePreview';
 import ChappServices from '../components/ChappServices';
 import ChappContactForm from '../components/ChappContactForm';
 import ChappFooter from '../components/ChappFooter';
@@ -35,6 +36,7 @@ const Index = () => {
       <ChappNavbar />
       <ChappHero />
       <ChappAbout />
+      <ChappInteractivePreview />
       <ChappServices />
       <ChappContactForm />
       <ChappFooter />
