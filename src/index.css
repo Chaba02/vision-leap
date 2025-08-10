@@ -88,22 +88,13 @@
 
 /* Premium Dark Theme Styles */
 @layer components {
-  /* Typography */
-  .text-chapp-title {
-    @apply text-chapp-title;
-  }
-  
-  .text-chapp-body {
-    @apply text-chapp-body;
-  }
-  
-  .text-chapp-hero {
-    @apply text-chapp-white font-semibold tracking-tight;
-  }
-
   /* Layout */
   .container-chapp {
     @apply max-w-7xl mx-auto;
+  }
+  
+  .container-chapp-narrow {
+    @apply max-w-4xl mx-auto;
   }
   
   .section-chapp {
@@ -125,6 +116,14 @@
            rounded-2xl border border-chapp-white/20 shadow-chapp
            transition-all duration-300 hover:bg-chapp-white/20 hover:shadow-chapp-lg hover:scale-105
            focus:outline-none focus:ring-2 focus:ring-chapp-white/30;
+  }
+  
+  .btn-chapp-accent {
+    @apply inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 
+           bg-gradient-blue-vivid text-chapp-white font-semibold text-body-lg 
+           rounded-2xl shadow-chapp-lg backdrop-blur-sm border border-chapp-accent-blue-vivid/30
+           transition-all duration-300 hover:shadow-glow-blue-strong hover:scale-105 
+           focus:outline-none focus:ring-2 focus:ring-chapp-accent-blue/50;
   }
   
   .btn-chapp-ghost {
@@ -176,7 +175,22 @@
            focus:border-chapp-accent-blue/50 transition-all duration-300;
   }
   
+  .form-chapp {
+    @apply w-full px-4 py-3 bg-chapp-dark-card/50 border border-chapp-white/20 
+           rounded-xl text-chapp-white placeholder-chapp-gray-400 
+           focus:outline-none focus:ring-2 focus:ring-chapp-accent-blue/50 
+           focus:border-chapp-accent-blue/50 transition-all duration-300;
+  }
+  
   .form-textarea-dark {
+    @apply w-full px-4 py-3 bg-chapp-dark-card/50 border border-chapp-white/20 
+           rounded-xl text-chapp-white placeholder-chapp-gray-400 
+           focus:outline-none focus:ring-2 focus:ring-chapp-accent-blue/50 
+           focus:border-chapp-accent-blue/50 transition-all duration-300 
+           resize-none min-h-[120px];
+  }
+  
+  .form-textarea-chapp {
     @apply w-full px-4 py-3 bg-chapp-dark-card/50 border border-chapp-white/20 
            rounded-xl text-chapp-white placeholder-chapp-gray-400 
            focus:outline-none focus:ring-2 focus:ring-chapp-accent-blue/50 
@@ -202,7 +216,8 @@
   /* Mobile Optimizations */
   @media (max-width: 640px) {
     .btn-chapp-primary,
-    .btn-chapp-secondary {
+    .btn-chapp-secondary,
+    .btn-chapp-accent {
       @apply px-4 py-2.5 text-body-md;
     }
     
