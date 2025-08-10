@@ -18,10 +18,10 @@ const ChappHero = () => {
             Consulenza Premium
           </div>
 
-          {/* Main heading */}
+          {/* Main heading con gradiente blu migliorato */}
           <h1 className="text-hero sm:text-hero text-chapp-hero mb-8 animate-fade-in-up">
             Trasforma il tuo{' '}
-            <span className="bg-gradient-to-r from-chapp-accent-blue to-chapp-accent-purple bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent">
               Business
             </span>{' '}
             con Chapp

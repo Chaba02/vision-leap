@@ -66,6 +66,16 @@
   ::selection {
     @apply bg-chapp-accent-blue/30;
   }
+
+  /* Custom select styling */
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23d1d5db' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
 }
 
 /* Dark Mode Premium Component Variants */
@@ -187,6 +197,19 @@
   .link-hover-dark:hover::after {
     @apply w-full;
   }
+
+  /* Interactive Dashboard Elements */
+  .dashboard-card {
+    @apply bg-chapp-white/5 backdrop-blur-sm border border-chapp-white/10 rounded-2xl transition-all duration-300 hover:bg-chapp-white/10 hover:scale-105;
+  }
+
+  .chart-bar {
+    @apply bg-gradient-to-t from-chapp-accent-blue to-chapp-accent-blue-light rounded-t-lg transition-all duration-1000;
+  }
+
+  .filter-select {
+    @apply bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-xl text-chapp-white focus:ring-2 focus:ring-chapp-accent-blue focus:border-chapp-accent-blue transition-all duration-300;
+  }
 }
 
 /* Dark Mode Scrollbar Styling */
@@ -207,11 +230,39 @@
 }
 
 /* Smooth transitions for all interactive elements */
-a, button, [role="button"] {
+a, button, [role="button"], select {
   @apply transition-all duration-300;
 }
 
 /* Dark mode focus styles */
 *:focus-visible {
   @apply ring-2 ring-chapp-accent-blue ring-offset-2 ring-offset-chapp-dark-bg outline-none;
+}
+
+/* Enhanced animations for BI Dashboard */
+@keyframes data-update {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-data-update {
+  animation: data-update 0.6s ease-in-out;
+}
+
+/* Loading states */
+.loading-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }

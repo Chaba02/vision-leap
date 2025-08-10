@@ -44,21 +44,21 @@ const ChappNavbar = () => {
       }`}
     >
       <div className="container-chapp">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="text-heading-xl text-chapp-white font-display">
+            <div className="text-heading-lg text-chapp-white font-display">
               Chapp
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-body-lg font-medium text-chapp-gray-300 hover:text-chapp-white transition-all duration-300 relative group link-hover-dark"
+                className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-all duration-300 relative group link-hover-dark"
               >
                 {link.name}
                 <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-chapp-accent-blue scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
@@ -67,40 +67,40 @@ const ChappNavbar = () => {
           </div>
 
           {/* Language Dropdown & CTA */}
-          <div className="hidden md:flex items-center space-x-4">
-            {/* Language Dropdown */}
+          <div className="hidden md:flex items-center space-x-3">
+            {/* Language Dropdown - Dimensioni ridotte */}
             <div className="relative">
               <button
                 onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-                className="flex items-center space-x-2 px-4 py-2 bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-xl text-chapp-gray-300 hover:text-chapp-white hover:bg-chapp-white/15 transition-all duration-300 group"
+                className="flex items-center space-x-2 px-3 py-2 bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-lg text-chapp-gray-300 hover:text-chapp-white hover:bg-chapp-white/15 transition-all duration-300 group"
               >
-                <Globe size={16} className="group-hover:rotate-12 transition-transform duration-300" />
-                <span className="text-body-md font-medium">
+                <Globe size={14} className="group-hover:rotate-12 transition-transform duration-300" />
+                <span className="text-body-sm font-medium">
                   {languages.find(lang => lang.code === currentLanguage)?.flag}
                 </span>
                 <ChevronDown 
-                  size={14} 
+                  size={12} 
                   className={`transition-transform duration-300 ${isLanguageOpen ? 'rotate-180' : ''}`} 
                 />
               </button>
 
               {/* Dropdown Menu */}
               {isLanguageOpen && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-chapp-dark-card/95 backdrop-blur-xl border border-chapp-white/20 rounded-2xl shadow-glass-dark overflow-hidden z-60">
+                <div className="absolute top-full right-0 mt-2 w-44 bg-chapp-dark-card/95 backdrop-blur-xl border border-chapp-white/20 rounded-xl shadow-glass-dark overflow-hidden z-60">
                   {languages.map((language) => (
                     <button
                       key={language.code}
                       onClick={() => handleLanguageSelect(language.code)}
-                      className={`w-full flex items-center space-x-3 px-4 py-3 text-left text-body-md font-medium transition-all duration-300 hover:bg-chapp-white/10 ${
+                      className={`w-full flex items-center space-x-3 px-3 py-2 text-left text-body-sm font-medium transition-all duration-300 hover:bg-chapp-white/10 ${
                         currentLanguage === language.code 
                           ? 'text-chapp-accent-blue bg-chapp-white/5' 
                           : 'text-chapp-gray-300 hover:text-chapp-white'
                       }`}
                     >
-                      <span className="text-lg">{language.flag}</span>
+                      <span className="text-sm">{language.flag}</span>
                       <span>{language.name}</span>
                       {currentLanguage === language.code && (
-                        <div className="ml-auto w-2 h-2 bg-chapp-accent-blue rounded-full animate-glow"></div>
+                        <div className="ml-auto w-1.5 h-1.5 bg-chapp-accent-blue rounded-full animate-glow"></div>
                       )}
                     </button>
                   ))}
@@ -108,30 +108,30 @@ const ChappNavbar = () => {
               )}
             </div>
 
-            {/* CTA Button */}
-            <button className="btn-chapp-accent hover-glow-blue">
+            {/* CTA Button - Dimensioni ridotte */}
+            <button className="px-5 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue">
               Inizia Ora
             </button>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-3">
+          <div className="md:hidden flex items-center space-x-2">
             {/* Mobile Language Selector */}
             <button
               onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-              className="flex items-center space-x-1 px-3 py-2 bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-lg text-chapp-gray-300 hover:text-chapp-white transition-all duration-300"
+              className="flex items-center space-x-1 px-2 py-1.5 bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-lg text-chapp-gray-300 hover:text-chapp-white transition-all duration-300"
             >
-              <span className="text-sm">
+              <span className="text-xs">
                 {languages.find(lang => lang.code === currentLanguage)?.flag}
               </span>
             </button>
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 p-2 bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-lg"
+              className="text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 p-1.5 bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-lg"
               aria-label="Toggle menu"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
@@ -139,15 +139,15 @@ const ChappNavbar = () => {
         {/* Mobile Navigation */}
         <div
           className={`md:hidden transition-all duration-500 overflow-hidden ${
-            isOpen ? 'max-h-96 pb-6' : 'max-h-0'
+            isOpen ? 'max-h-80 pb-4' : 'max-h-0'
           }`}
         >
-          <div className="flex flex-col space-y-4 pt-4 border-t border-chapp-white/20">
+          <div className="flex flex-col space-y-3 pt-3 border-t border-chapp-white/20">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-body-lg font-medium text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 px-4 py-2 hover:bg-chapp-white/10 rounded-xl"
+                className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 px-3 py-2 hover:bg-chapp-white/10 rounded-lg"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
@@ -156,12 +156,12 @@ const ChappNavbar = () => {
             
             {/* Mobile Language Options */}
             {isLanguageOpen && (
-              <div className="px-4 space-y-2">
+              <div className="px-3 space-y-1">
                 {languages.map((language) => (
                   <button
                     key={language.code}
                     onClick={() => handleLanguageSelect(language.code)}
-                    className={`w-full flex items-center space-x-3 px-3 py-2 text-left text-body-md font-medium rounded-xl transition-all duration-300 ${
+                    className={`w-full flex items-center space-x-2 px-2 py-1.5 text-left text-body-sm font-medium rounded-lg transition-all duration-300 ${
                       currentLanguage === language.code 
                         ? 'text-chapp-accent-blue bg-chapp-white/10' 
                         : 'text-chapp-gray-300 hover:text-chapp-white hover:bg-chapp-white/5'
@@ -174,8 +174,8 @@ const ChappNavbar = () => {
               </div>
             )}
             
-            <div className="px-4 pt-2">
-              <button className="btn-chapp-accent w-full">
+            <div className="px-3 pt-1">
+              <button className="w-full px-4 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-lg text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300">
                 Inizia Ora
               </button>
             </div>
