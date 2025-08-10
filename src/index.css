@@ -83,125 +83,76 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', sans-serif;
   }
 }
 
-/* Premium Dark Theme Styles */
+/* Apple Style Theme */
 @layer components {
   /* Layout */
-  .container-chapp {
-    @apply max-w-7xl mx-auto;
+  .container-apple {
+    @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-20;
   }
   
-  .container-chapp-narrow {
-    @apply max-w-4xl mx-auto;
+  .container-apple-narrow {
+    @apply max-w-4xl mx-auto px-6 sm:px-8 lg:px-20;
   }
   
-  .section-chapp {
+  .section-apple {
     @apply py-16 sm:py-20 lg:py-24;
   }
 
-  /* Buttons */
-  .btn-chapp-primary {
+  /* Buttons - Apple Style */
+  .btn-apple-primary {
     @apply inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 
-           bg-gradient-blue-vivid text-chapp-white font-semibold text-body-lg 
-           rounded-2xl shadow-chapp-lg backdrop-blur-sm border border-chapp-white/10
-           transition-all duration-300 hover:shadow-glow-blue-strong hover:scale-105 
-           focus:outline-none focus:ring-2 focus:ring-chapp-accent-blue/50;
+           bg-apple-black text-apple-white font-semibold text-body-lg 
+           rounded-2xl shadow-apple-lg backdrop-blur-sm
+           transition-all duration-300 hover:shadow-apple-xl hover:scale-105 
+           focus:outline-none focus:ring-2 focus:ring-apple-black/50;
   }
   
-  .btn-chapp-secondary {
+  .btn-apple-secondary {
     @apply inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 
-           bg-chapp-white/10 backdrop-blur-sm text-chapp-white font-semibold text-body-lg 
-           rounded-2xl border border-chapp-white/20 shadow-chapp
-           transition-all duration-300 hover:bg-chapp-white/20 hover:shadow-chapp-lg hover:scale-105
-           focus:outline-none focus:ring-2 focus:ring-chapp-white/30;
+           bg-apple-white/80 backdrop-blur-sm text-apple-black font-semibold text-body-lg 
+           rounded-2xl border border-apple-gray-200 shadow-apple
+           transition-all duration-300 hover:bg-apple-white hover:shadow-apple-lg hover:scale-105
+           focus:outline-none focus:ring-2 focus:ring-apple-gray-300;
   }
-  
-  .btn-chapp-accent {
-    @apply inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 
-           bg-gradient-blue-vivid text-chapp-white font-semibold text-body-lg 
-           rounded-2xl shadow-chapp-lg backdrop-blur-sm border border-chapp-accent-blue-vivid/30
-           transition-all duration-300 hover:shadow-glow-blue-strong hover:scale-105 
-           focus:outline-none focus:ring-2 focus:ring-chapp-accent-blue/50;
-  }
-  
-  .btn-chapp-ghost {
-    @apply inline-flex items-center justify-center px-4 py-2 sm:px-6 sm:py-3 
-           text-chapp-accent-blue font-medium text-body-md 
-           rounded-xl transition-all duration-300 hover:bg-chapp-accent-blue/10 
-           hover:text-chapp-accent-blue-light hover:scale-105
-           focus:outline-none focus:ring-2 focus:ring-chapp-accent-blue/30;
+
+  /* Glass Effects */
+  .glass {
+    @apply bg-apple-white/80 backdrop-blur-xl border border-apple-white/20;
   }
 
   /* Cards */
-  .card-glass-dark {
-    @apply bg-gradient-glass-dark backdrop-blur-sm border border-chapp-white/10 
-           rounded-3xl shadow-glass-dark;
-  }
-  
-  .card-premium-dark {
-    @apply bg-chapp-dark-card/80 backdrop-blur-sm border border-chapp-white/10 
-           rounded-3xl shadow-chapp-xl;
+  .card-apple {
+    @apply bg-apple-white/90 backdrop-blur-sm border border-apple-gray-100 
+           rounded-3xl shadow-apple-lg;
   }
 
   /* Hover Effects */
-  .hover-lift-dark {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-chapp-xl;
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-apple-xl;
   }
   
-  .hover-scale-dark {
+  .hover-scale {
     @apply transition-all duration-300 hover:scale-105;
-  }
-  
-  .hover-glow-blue {
-    @apply transition-all duration-300 hover:shadow-glow-blue;
-  }
-
-  /* Responsive Spacing */
-  .responsive-padding {
-    @apply px-6 sm:px-8 lg:px-20;
-  }
-  
-  .responsive-margin {
-    @apply mx-6 sm:mx-8 lg:mx-20;
   }
 
   /* Form Styles */
-  .form-input-dark {
-    @apply w-full px-4 py-3 bg-chapp-dark-card/50 border border-chapp-white/20 
-           rounded-xl text-chapp-white placeholder-chapp-gray-400 
-           focus:outline-none focus:ring-2 focus:ring-chapp-accent-blue/50 
-           focus:border-chapp-accent-blue/50 transition-all duration-300;
+  .form-input-apple {
+    @apply w-full px-4 py-3 bg-apple-white border border-apple-gray-200 
+           rounded-xl text-apple-black placeholder-apple-gray-500 
+           focus:outline-none focus:ring-2 focus:ring-apple-accent-blue/50 
+           focus:border-apple-accent-blue/50 transition-all duration-300;
   }
   
-  .form-chapp {
-    @apply w-full px-4 py-3 bg-chapp-dark-card/50 border border-chapp-white/20 
-           rounded-xl text-chapp-white placeholder-chapp-gray-400 
-           focus:outline-none focus:ring-2 focus:ring-chapp-accent-blue/50 
-           focus:border-chapp-accent-blue/50 transition-all duration-300;
-  }
-  
-  .form-textarea-dark {
-    @apply w-full px-4 py-3 bg-chapp-dark-card/50 border border-chapp-white/20 
-           rounded-xl text-chapp-white placeholder-chapp-gray-400 
-           focus:outline-none focus:ring-2 focus:ring-chapp-accent-blue/50 
-           focus:border-chapp-accent-blue/50 transition-all duration-300 
+  .form-textarea-apple {
+    @apply w-full px-4 py-3 bg-apple-white border border-apple-gray-200 
+           rounded-xl text-apple-black placeholder-apple-gray-500 
+           focus:outline-none focus:ring-2 focus:ring-apple-accent-blue/50 
+           focus:border-apple-accent-blue/50 transition-all duration-300 
            resize-none min-h-[120px];
-  }
-  
-  .form-textarea-chapp {
-    @apply w-full px-4 py-3 bg-chapp-dark-card/50 border border-chapp-white/20 
-           rounded-xl text-chapp-white placeholder-chapp-gray-400 
-           focus:outline-none focus:ring-2 focus:ring-chapp-accent-blue/50 
-           focus:border-chapp-accent-blue/50 transition-all duration-300 
-           resize-none min-h-[120px];
-  }
-
-  /* Navigation */
-  .nav-link-dark {
-    @apply text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 
-           text-body-lg font-medium;
   }
 
   /* Animations */
@@ -213,20 +164,60 @@
     @apply opacity-100 translate-y-0;
   }
 
+  /* Typography Helpers */
+  .text-gradient-apple {
+    @apply bg-gradient-to-r from-apple-night-blue to-apple-accent-blue bg-clip-text text-transparent;
+  }
+
   /* Mobile Optimizations */
   @media (max-width: 640px) {
-    .btn-chapp-primary,
-    .btn-chapp-secondary,
-    .btn-chapp-accent {
+    .btn-apple-primary,
+    .btn-apple-secondary {
       @apply px-4 py-2.5 text-body-md;
     }
     
-    .section-chapp {
+    .section-apple {
       @apply py-12;
     }
     
-    .responsive-padding {
+    .container-apple,
+    .container-apple-narrow {
       @apply px-4;
+    }
+  }
+
+  /* Enhanced Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+  }
+  
+  @keyframes glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  /* Language Dropdown Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }
