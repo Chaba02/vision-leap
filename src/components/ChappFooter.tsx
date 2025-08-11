@@ -31,11 +31,7 @@ const ChappFooter = () => {
               Cookie Policy
             </a>
           </div>
-          <div className="mt-6 pt-6 border-t border-chapp-gray-800">
-            <p className="text-caption text-chapp-gray-500">
-              Specialisti in Web-App e Business Intelligence
-            </p>
-          </div>
+          
         </div>
       </div>
     </footer>

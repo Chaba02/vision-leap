@@ -11,6 +11,14 @@ import {
 } from 'lucide-react';
 
 const ChappServices = () => {
+
+  const handleButton = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const services = [
     {
       icon: Monitor,
@@ -33,20 +41,7 @@ const ChappServices = () => {
       features: ['Metriche personalizzate', 'Report automatici', 'Alert intelligenti'],
       color: 'from-purple-500 to-purple-600'
     },
-    {
-      icon: Cloud,
-      title: 'Cloud Solutions',
-      description: 'Migrazione e gestione di infrastrutture cloud scalabili e sicure per le tue applicazioni.',
-      features: ['AWS/Azure/GCP', 'Microservizi', 'DevOps automation'],
-      color: 'from-amber-500 to-amber-600'
-    },
-    {
-      icon: Smartphone,
-      title: 'Mobile-First Design',
-      description: 'Progettazione mobile-first per garantire un\'esperienza utente ottimale su tutti i dispositivi.',
-      features: ['Responsive design', 'PWA development', 'Cross-platform'],
-      color: 'from-rose-500 to-rose-600'
-    },
+    
     {
       icon: Settings,
       title: 'Integrazione Sistemi',
@@ -75,7 +70,7 @@ const ChappServices = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-16">
           {services.map((service, index) => (
             <div
               key={index}
@@ -126,7 +121,7 @@ const ChappServices = () => {
               I nostri sviluppatori e data analyst sono pronti ad analizzare le tue esigenze 
               e proporti la soluzione tecnologica più adatta al tuo business.
             </p>
-            <button className="btn-chapp-secondary hover-glow-blue">
+            <button className="btn-chapp-secondary hover-glow-blue" onClick={handleButton}>
               Prenota una Consulenza Gratuita
             </button>
           </div>

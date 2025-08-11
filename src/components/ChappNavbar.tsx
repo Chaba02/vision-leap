@@ -21,7 +21,6 @@ const ChappNavbar = () => {
   const navLinks = [
     { name: t('Chi Siamo'), href: '#about' },
     { name: t('Servizi'), href: '#services' },
-    { name: t('Testimonianze'), href: '#testimonials' },
     { name: t('Contatti'), href: '#contact' },
   ];
 
