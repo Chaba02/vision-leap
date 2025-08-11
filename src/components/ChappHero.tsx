@@ -22,9 +22,20 @@ const ChappHero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero-dark">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-chapp-accent-blue/10 rounded-full blur-3xl opacity-50 animate-float"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-chapp-accent-purple/10 rounded-full blur-3xl opacity-30 animate-float" style={{ animationDelay: '2s' }}></div>
+      {/* Dynamic Glowing Spheres Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Sphere 1 - Blue */}
+        <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-sphere-blue rounded-full blur-3xl animate-float-sphere-1"></div>
+        
+        {/* Sphere 2 - Purple */}
+        <div className="absolute bottom-32 left-16 w-80 h-80 bg-gradient-sphere-purple rounded-full blur-3xl animate-float-sphere-2"></div>
+        
+        {/* Sphere 3 - Cyan */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-sphere-cyan rounded-full blur-3xl animate-float-sphere-3"></div>
+        
+        {/* Sphere 4 - Pink */}
+        <div className="absolute top-1/3 right-1/3 w-72 h-72 bg-gradient-sphere-pink rounded-full blur-3xl animate-float-sphere-4"></div>
+      </div>
 
       {/* Content */}
       <div className="relative z-10 container-chapp section-chapp text-center">
@@ -35,17 +46,17 @@ const ChappHero = () => {
             ✨ {t('Dove le idee prendono vita digitale')}
           </div>
 
-          {/* Main heading */}
+          {/* Main heading with glow effect */}
           <h1 className="text-hero sm:text-hero text-chapp-hero mb-6 animate-fade-in-up leading-tight">
             {t('Trasformiamo idee in')}{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(59,130,246,0.5)]">
               successo
             </span>{' '}
             digitale
           </h1>
 
           {/* Subtitle */}
-          <p className="text-body-xl text-chapp-body mb-12 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <p className="text-body-xl text-chapp-body mb-12 max-w-2xl mx-auto animate-fade-in-up leading-relaxed" style={{ animationDelay: '0.2s' }}>
             {t('Web-app moderne e dashboard intelligenti per far crescere il tuo business. Sviluppo rapido, risultati concreti.')}
           </p>
 

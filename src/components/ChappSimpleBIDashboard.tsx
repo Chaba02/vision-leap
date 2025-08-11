@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { 
-  TrendingUp, ExternalLink, BarChart3
+  TrendingUp, ExternalLink, BarChart3, Users, DollarSign, 
+  ShoppingCart, Target, ArrowUpRight, ArrowDownRight, Activity
 } from 'lucide-react';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from './ui/chart';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
@@ -26,6 +27,58 @@ const ChappSimpleBIDashboard = () => {
     { month: 'Apr', value: 165000 },
     { month: 'Mag', value: 178000 },
     { month: 'Giu', value: 195000 }
+  ];
+
+  // KPI Data
+  const kpiData = [
+    {
+      title: t('Fatturato Totale'),
+      value: '€1.2M',
+      change: '+12.5%',
+      changeType: 'positive',
+      icon: DollarSign,
+      period: t('vs mese scorso')
+    },
+    {
+      title: t('Clienti Attivi'),
+      value: '2,847',
+      change: '+8.2%',
+      changeType: 'positive',
+      icon: Users,
+      period: t('questo mese')
+    },
+    {
+      title: t('Ordini Completati'),
+      value: '4,326',
+      change: '+15.7%',
+      changeType: 'positive',
+      icon: ShoppingCart,
+      period: t('ultimo trimestre')
+    },
+    {
+      title: t('Tasso Conversione'),
+      value: '23.4%',
+      change: '-2.1%',
+      changeType: 'negative',
+      icon: Target,
+      period: t('media mensile')
+    },
+    {
+      title: t('Valore Medio Ordine'),
+      value: '€89',
+      change: '+5.3%',
+      changeType: 'positive',
+      icon: TrendingUp,
+      period: t('vs trimestre precedente')
+    },
+    {
+      title: t('Sessioni Attive'),
+      value: '12,459',
+      change: '+18.9%',
+      changeType: 'positive',
+      icon: Activity,
+      period: t('tempo reale')
+    }
   ];
 
   const handleDashboardClick = () => {
@@ -61,63 +114,112 @@ const ChappSimpleBIDashboard = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto animate-on-scroll">
+        <div className="max-w-7xl mx-auto animate-on-scroll">
           {/* Dashboard Container */}
-          <div className="card-glass-dark p-6">
+          <div className="card-glass-dark p-4 lg:p-8">
             {/* Header */}
-            <div className="flex items-center justify-between mb-8 pb-4 border-b border-chapp-white/10">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 pb-4 border-b border-chapp-white/10 gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-chapp-accent-blue rounded-lg flex items-center justify-center">
                   <TrendingUp size={18} className="text-white" />
                 </div>
-                <span className="text-heading-md text-chapp-white font-semibold">
-                  {t('Dashboard Aziendale')}
-                </span>
+                <div>
+                  <span className="text-heading-md text-chapp-white font-semibold block">
+                    {t('Dashboard Aziendale')}
+                  </span>
+                  <span className="text-chapp-gray-400 text-body-sm">
+                    {t('Aggiornato')} 2 {t('minuti fa')}
+                  </span>
+                </div>
               </div>
               
               <button
                 onClick={handleDashboardClick}
-                className="btn-chapp-small group"
+                className="btn-chapp-small group w-full sm:w-auto justify-center sm:justify-start"
               >
                 <ExternalLink size={16} />
-                {t('Vai alla Dashboard')}
+                {t('Apri Dashboard Completa')}
               </button>
             </div>
 
-            {/* KPI Card */}
-            <div className="mb-8">
-              <div className="dashboard-card p-6 hover:scale-105 transition-transform duration-300">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="p-3 rounded-xl bg-green-400/10">
-                    <TrendingUp size={24} className="text-green-400" />
+            {/* KPI Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-8">
+              {kpiData.map((kpi, index) => {
+                const IconComponent = kpi.icon;
+                const isPositive = kpi.changeType === 'positive';
+                const ChangeIcon = isPositive ? ArrowUpRight : ArrowDownRight;
+                
+                return (
+                  <div
+                    key={index}
+                    className="dashboard-card p-4 lg:p-6 hover:scale-105 transition-all duration-300 group"
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`p-3 rounded-xl ${
+                        isPositive ? 'bg-green-400/10' : 'bg-red-400/10'
+                      }`}>
+                        <IconComponent size={20} className={`${
+                          isPositive ? 'text-green-400' : 'text-red-400'
+                        }`} />
+                      </div>
+                      <div className={`flex items-center gap-1 text-body-sm font-medium ${
+                        isPositive ? 'text-green-400' : 'text-red-400'
+                      }`}>
+                        <ChangeIcon size={16} />
+                        {kpi.change}
+                      </div>
+                    </div>
+                    
+                    <div className="text-heading-xl text-chapp-white font-bold mb-1 group-hover:text-chapp-accent-blue transition-colors">
+                      {kpi.value}
+                    </div>
+                    
+                    <div className="text-chapp-gray-300 text-body-md font-medium mb-1">
+                      {kpi.title}
+                    </div>
+                    
+                    <div className="text-chapp-gray-500 text-body-sm">
+                      {kpi.period}
+                    </div>
                   </div>
-                  <span className="text-green-400 text-body-sm font-medium">
-                    +12.5%
-                  </span>
-                </div>
-                <div className="text-heading-xl text-chapp-white font-bold mb-1">
-                  €500K
-                </div>
-                <div className="text-chapp-gray-400 text-body-sm">
-                  {t('Fatturato Totale')}
-                </div>
-              </div>
+                );
+              })}
             </div>
 
             {/* Revenue Chart */}
-            <div className="dashboard-card p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h4 className="text-heading-md text-chapp-white">
-                  {t('Andamento Fatturato')}
-                </h4>
+            <div className="dashboard-card p-4 lg:p-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+                <div>
+                  <h4 className="text-heading-md text-chapp-white mb-1">
+                    {t('Andamento Fatturato')}
+                  </h4>
+                  <p className="text-chapp-gray-400 text-body-sm">
+                    {t('Ultimi 6 mesi - Crescita costante del')} +12.5%
+                  </p>
+                </div>
+                
+                <div className="flex items-center gap-2 text-green-400 text-body-sm font-medium">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  {t('Live')}
+                </div>
               </div>
               
-              <div className="h-64">
+              <div className="h-64 lg:h-80">
                 <ChartContainer config={revenueChartConfig}>
                   <LineChart data={revenueData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                    <XAxis dataKey="month" stroke="rgba(255,255,255,0.6)" fontSize={12} />
-                    <YAxis stroke="rgba(255,255,255,0.6)" fontSize={12} />
+                    <XAxis 
+                      dataKey="month" 
+                      stroke="rgba(255,255,255,0.6)" 
+                      fontSize={12}
+                      tick={{ fill: 'rgba(255,255,255,0.6)' }}
+                    />
+                    <YAxis 
+                      stroke="rgba(255,255,255,0.6)" 
+                      fontSize={12}
+                      tick={{ fill: 'rgba(255,255,255,0.6)' }}
+                      tickFormatter={(value: number) => `€${(value / 1000).toFixed(0)}K`}
+                    />
                     <ChartTooltip 
                       content={<ChartTooltipContent />}
                       formatter={(value: number) => [`€${(value / 1000).toFixed(0)}K`, 'Fatturato']}
@@ -132,6 +234,24 @@ const ChappSimpleBIDashboard = () => {
                     />
                   </LineChart>
                 </ChartContainer>
+              </div>
+            </div>
+
+            {/* Performance Summary */}
+            <div className="mt-6 p-4 lg:p-6 bg-chapp-white/5 backdrop-blur-sm border border-chapp-white/10 rounded-2xl">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="text-center lg:text-left">
+                  <div className="text-heading-lg text-chapp-white font-bold mb-1">95%</div>
+                  <div className="text-chapp-gray-300 text-body-md">{t('Soddisfazione Clienti')}</div>
+                </div>
+                <div className="text-center lg:text-left">
+                  <div className="text-heading-lg text-chapp-white font-bold mb-1">24/7</div>
+                  <div className="text-chapp-gray-300 text-body-md">{t('Monitoraggio Continuo')}</div>
+                </div>
+                <div className="text-center lg:text-left">
+                  <div className="text-heading-lg text-chapp-white font-bold mb-1">99.9%</div>
+                  <div className="text-chapp-gray-300 text-body-md">{t('Uptime Sistema')}</div>
+                </div>
               </div>
             </div>
           </div>
