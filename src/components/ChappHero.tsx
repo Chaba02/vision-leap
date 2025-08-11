@@ -11,27 +11,26 @@ const ChappHero = () => {
 
       {/* Content */}
       <div className="relative z-10 container-chapp section-chapp text-center">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-chapp-white/10 backdrop-blur-sm text-chapp-gray-200 px-6 py-3 rounded-full text-body-md font-medium mb-8 animate-fade-in shadow-chapp border border-chapp-white/20">
             <div className="w-2 h-2 bg-chapp-accent-blue rounded-full animate-glow"></div>
             ✨ Dove le idee prendono vita digitale
           </div>
 
-          {/* Main heading con gradiente blu migliorato */}
-          <h1 className="text-hero sm:text-hero text-chapp-hero mb-8 animate-fade-in-up">
-            Le tue idee meritano di diventare{' '}
+          {/* Main heading - più conciso e d'impatto */}
+          <h1 className="text-hero sm:text-hero text-chapp-hero mb-6 animate-fade-in-up leading-tight">
+            Trasformiamo idee in{' '}
             <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent">
-              grandi
-            </span>
-            .<br />
-            Noi ti aiutiamo a farle correre più veloce.
+              successo
+            </span>{' '}
+            digitale
           </h1>
 
-          {/* Subtitle */}
-          <p className="text-body-xl text-chapp-body mb-12 max-w-3xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            Trasformiamo le tue visioni in web-app potenti e dashboard BI intelligenti. 
-            Consulenza strategica e sviluppo rapido per far decollare il tuo business nell'era digitale.
+          {/* Subtitle - più breve e diretto */}
+          <p className="text-body-xl text-chapp-body mb-12 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            Web-app moderne e dashboard intelligenti per far crescere il tuo business. 
+            Sviluppo rapido, risultati concreti.
           </p>
 
           {/* CTA Buttons */}
@@ -46,11 +45,11 @@ const ChappHero = () => {
             </button>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+          {/* Stats - più semplici */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
             {[
-              { number: '+40%', label: 'Produttività aumentata' },
-              { number: '3x', label: 'Efficienza migliorata' },
+              { number: '+40%', label: 'Produttività' },
+              { number: '3x', label: 'Velocità' },
               { number: '60%', label: 'Tempi ridotti' }
             ].map((stat, index) => (
               <div
