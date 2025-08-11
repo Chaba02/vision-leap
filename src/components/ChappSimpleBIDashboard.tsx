@@ -175,7 +175,7 @@ const ChappSimpleBIDashboard = () => {
                       <YAxis stroke="rgba(255,255,255,0.6)" fontSize={12} />
                       <ChartTooltip 
                         content={<ChartTooltipContent />}
-                        formatter={(value) => [`€${(value / 1000).toFixed(0)}K`, 'Fatturato']}
+                        formatter={(value: number) => [`€${(value / 1000).toFixed(0)}K`, 'Fatturato']}
                       />
                       <Line 
                         type="monotone" 
