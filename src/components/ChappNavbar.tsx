@@ -1,12 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Globe } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const ChappNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const [currentLanguage, setCurrentLanguage] = useState('IT');
+  const { currentLanguage, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,10 +19,10 @@ const ChappNavbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Chi Siamo', href: '#about' },
-    { name: 'Servizi', href: '#services' },
-    { name: 'Testimonianze', href: '#testimonials' },
-    { name: 'Contatti', href: '#contact' },
+    { name: t('Chi Siamo'), href: '#about' },
+    { name: t('Servizi'), href: '#services' },
+    { name: t('Testimonianze'), href: '#testimonials' },
+    { name: t('Contatti'), href: '#contact' },
   ];
 
   const languages = [
@@ -31,8 +32,15 @@ const ChappNavbar = () => {
   ];
 
   const handleLanguageSelect = (langCode: string) => {
-    setCurrentLanguage(langCode);
+    setLanguage(langCode);
     setIsLanguageOpen(false);
+  };
+
+  const handleCTAClick = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -46,7 +54,12 @@ const ChappNavbar = () => {
       <div className="container-chapp">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center gap-3">
+            <img 
+              src="https://via.placeholder.com/40x40/3B82F6/FFFFFF?text=C" 
+              alt="Chapp Logo" 
+              className="w-8 h-8 rounded-lg"
+            />
             <div className="text-heading-lg text-chapp-white font-display">
               Chapp
             </div>
@@ -68,7 +81,7 @@ const ChappNavbar = () => {
 
           {/* Language Dropdown & CTA */}
           <div className="hidden md:flex items-center space-x-3">
-            {/* Language Dropdown - Dimensioni ridotte */}
+            {/* Language Dropdown */}
             <div className="relative">
               <button
                 onClick={() => setIsLanguageOpen(!isLanguageOpen)}
@@ -108,9 +121,12 @@ const ChappNavbar = () => {
               )}
             </div>
 
-            {/* CTA Button - Dimensioni ridotte */}
-            <button className="px-5 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue">
-              Inizia Ora
+            {/* CTA Button */}
+            <button 
+              onClick={handleCTAClick}
+              className="px-5 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue"
+            >
+              {t('Inizia Ora')}
             </button>
           </div>
 
@@ -175,8 +191,11 @@ const ChappNavbar = () => {
             )}
             
             <div className="px-3 pt-1">
-              <button className="w-full px-4 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-lg text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300">
-                Inizia Ora
+              <button 
+                onClick={handleCTAClick}
+                className="w-full px-4 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-lg text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300"
+              >
+                {t('Inizia Ora')}
               </button>
             </div>
           </div>

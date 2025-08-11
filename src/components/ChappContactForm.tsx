@@ -1,8 +1,10 @@
 
 import React, { useState } from 'react';
 import { Send, CheckCircle, AlertCircle, User, Mail, Building, MessageSquare } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const ChappContactForm = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -73,24 +75,23 @@ const ChappContactForm = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-chapp-accent-blue/20 text-chapp-accent-blue px-4 py-2 rounded-full text-body-sm font-semibold mb-6">
-            Contattaci
+            {t('Contattaci')}
           </div>
           <h2 className="text-display-md text-chapp-title mb-6">
-            Inizia il Tuo{' '}
+            {t('Inizia il Tuo')}{' '}
             <span className="bg-gradient-blue-elegant bg-clip-text text-transparent">
               Progetto Digitale
             </span>
           </h2>
           <p className="text-body-xl text-chapp-body max-w-2xl mx-auto">
-            Contattaci per una consulenza gratuita e personalizzata. 
-            Il nostro team di esperti è pronto ad analizzare le tue esigenze tecnologiche.
+            {t('Contattaci per una consulenza gratuita e personalizzata. Il nostro team di esperti è pronto ad analizzare le tue esigenze tecnologiche.')}
           </p>
         </div>
 
         {/* Contact Form */}
         <div className="card-premium-dark p-8 lg:p-12 max-w-3xl mx-auto">
           <h3 className="text-heading-xl text-chapp-title mb-8 text-center">
-            Richiedi una Consulenza Gratuita
+            {t('Richiedi una Consulenza Gratuita')}
           </h3>
 
           {status === 'success' && (
@@ -206,7 +207,7 @@ const ChappContactForm = () => {
                 </>
               ) : (
                 <>
-                  Richiedi Consulenza
+                  {t('Prenota Consulenza Gratuita')}
                   <Send size={18} className="ml-2" />
                 </>
               )}

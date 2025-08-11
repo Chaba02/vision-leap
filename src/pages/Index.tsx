@@ -1,4 +1,6 @@
+
 import React, { useEffect } from 'react';
+import { LanguageProvider } from '../contexts/LanguageContext';
 import ChappNavbar from '../components/ChappNavbar';
 import ChappHero from '../components/ChappHero';
 import ChappAbout from '../components/ChappAbout';
@@ -31,15 +33,17 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-chapp-dark-bg overflow-x-hidden">
-      <ChappNavbar />
-      <ChappHero />
-      <ChappAbout />
-      <ChappSimpleBIDashboard />
-      <ChappServices />
-      <ChappContactForm />
-      <ChappFooter />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen bg-chapp-dark-bg overflow-x-hidden">
+        <ChappNavbar />
+        <ChappHero />
+        <ChappAbout />
+        <ChappSimpleBIDashboard />
+        <ChappServices />
+        <ChappContactForm />
+        <ChappFooter />
+      </div>
+    </LanguageProvider>
   );
 };
 

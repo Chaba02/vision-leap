@@ -1,8 +1,25 @@
 
 import React from 'react';
 import { ArrowRight, Play, Rocket } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const ChappHero = () => {
+  const { t } = useLanguage();
+
+  const handleGetStarted = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleDiscoverMore = () => {
+    const servicesSection = document.getElementById('services');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero-dark">
       {/* Background Elements */}
@@ -15,42 +32,47 @@ const ChappHero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-chapp-white/10 backdrop-blur-sm text-chapp-gray-200 px-6 py-3 rounded-full text-body-md font-medium mb-8 animate-fade-in shadow-chapp border border-chapp-white/20">
             <div className="w-2 h-2 bg-chapp-accent-blue rounded-full animate-glow"></div>
-            ✨ Dove le idee prendono vita digitale
+            ✨ {t('Dove le idee prendono vita digitale')}
           </div>
 
-          {/* Main heading - più conciso e d'impatto */}
+          {/* Main heading */}
           <h1 className="text-hero sm:text-hero text-chapp-hero mb-6 animate-fade-in-up leading-tight">
-            Trasformiamo idee in{' '}
+            {t('Trasformiamo idee in')}{' '}
             <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent">
               successo
             </span>{' '}
             digitale
           </h1>
 
-          {/* Subtitle - più breve e diretto */}
+          {/* Subtitle */}
           <p className="text-body-xl text-chapp-body mb-12 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            Web-app moderne e dashboard intelligenti per far crescere il tuo business. 
-            Sviluppo rapido, risultati concreti.
+            {t('Web-app moderne e dashboard intelligenti per far crescere il tuo business. Sviluppo rapido, risultati concreti.')}
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            <button className="btn-chapp-primary group hover-glow-blue">
-              Accelera le tue idee
+            <button 
+              onClick={handleGetStarted}
+              className="btn-chapp-primary group hover-glow-blue"
+            >
+              {t('Accelera le tue idee')}
               <Rocket size={20} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
-            <button className="btn-chapp-secondary group">
+            <button 
+              onClick={handleDiscoverMore}
+              className="btn-chapp-secondary group"
+            >
               <Play size={18} className="mr-2 group-hover:scale-110 transition-transform duration-300" />
-              Scopri come funziona
+              {t('Scopri come funziona')}
             </button>
           </div>
 
-          {/* Stats - più semplici */}
+          {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
             {[
-              { number: '+40%', label: 'Produttività' },
-              { number: '3x', label: 'Velocità' },
-              { number: '60%', label: 'Tempi ridotti' }
+              { number: '+40%', label: t('Produttività') },
+              { number: '3x', label: t('Velocità') },
+              { number: '60%', label: t('Tempi ridotti') }
             ].map((stat, index) => (
               <div
                 key={index}
