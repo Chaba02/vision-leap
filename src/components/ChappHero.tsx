@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight, Play, Rocket } from 'lucide-react';
 
 const ChappHero = () => {
   return (
@@ -15,43 +15,43 @@ const ChappHero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-chapp-white/10 backdrop-blur-sm text-chapp-gray-200 px-6 py-3 rounded-full text-body-md font-medium mb-8 animate-fade-in shadow-chapp border border-chapp-white/20">
             <div className="w-2 h-2 bg-chapp-accent-blue rounded-full animate-glow"></div>
-            Consulenza Premium
+            ✨ Dove le idee prendono vita digitale
           </div>
 
           {/* Main heading con gradiente blu migliorato */}
           <h1 className="text-hero sm:text-hero text-chapp-hero mb-8 animate-fade-in-up">
-            Trasforma il tuo{' '}
+            Le tue idee meritano di diventare{' '}
             <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent">
-              Business
-            </span>{' '}
-            con Chapp
+              grandi
+            </span>
+            .<br />
+            Noi ti aiutiamo a farle correre più veloce.
           </h1>
 
           {/* Subtitle */}
           <p className="text-body-xl text-chapp-body mb-12 max-w-3xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            Consulenza strategica di alto livello per aziende ambiziose. 
-            Accompagniamo la tua crescita con soluzioni innovative e personalizzate, 
-            trasformando le sfide in opportunità concrete di successo.
+            Trasformiamo le tue visioni in web-app potenti e dashboard BI intelligenti. 
+            Consulenza strategica e sviluppo rapido per far decollare il tuo business nell'era digitale.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
             <button className="btn-chapp-primary group hover-glow-blue">
-              Scopri i Nostri Servizi
-              <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+              Accelera le tue idee
+              <Rocket size={20} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
             <button className="btn-chapp-secondary group">
               <Play size={18} className="mr-2 group-hover:scale-110 transition-transform duration-300" />
-              Guarda la Presentazione
+              Scopri come funziona
             </button>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
             {[
-              { number: '250+', label: 'Clienti di Successo' },
-              { number: '98%', label: 'Soddisfazione Cliente' },
-              { number: '12+', label: 'Anni di Esperienza' }
+              { number: '+40%', label: 'Produttività aumentata' },
+              { number: '3x', label: 'Efficienza migliorata' },
+              { number: '60%', label: 'Tempi ridotti' }
             ].map((stat, index) => (
               <div
                 key={index}
