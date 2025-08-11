@@ -94,10 +94,10 @@ const ChappSimpleBIDashboard = () => {
   };
 
   return (
-    <section className="section-chapp bg-gradient-to-b from-chapp-dark-bg to-chapp-night-blue/20">
+    <section id="demo" className="section-chapp bg-gradient-to-b from-chapp-dark-bg to-chapp-night-blue/20">
       <div className="container-chapp">
         <div className="text-center mb-12 animate-on-scroll">
-          <div className="inline-flex items-center gap-2 bg-chapp-white/10 backdrop-blur-sm text-chapp-gray-200 px-6 py-3 rounded-full text-body-md font-medium mb-6 border border-chapp-white/20">
+          <div className="inline-flex items-center gap-2 bg-chapp-accent-blue/20 text-chapp-accent-blue px-4 py-2 rounded-full text-body-sm font-semibold mb-6 border border-chapp-accent-blue/30">
             <BarChart3 className="w-4 h-4" />
             {t('Demo Business Intelligence')}
           </div>

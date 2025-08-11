@@ -14,9 +14,9 @@ const ChappHero = () => {
   };
 
   const handleDiscoverMore = () => {
-    const servicesSection = document.getElementById('services');
-    if (servicesSection) {
-      servicesSection.scrollIntoView({ behavior: 'smooth' });
+    const demoSection = document.getElementById('demo');
+    if (demoSection) {
+      demoSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -41,7 +41,7 @@ const ChappHero = () => {
       <div className="relative z-10 container-chapp section-chapp text-center">
         <div className="max-w-4xl mx-auto">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-chapp-white/10 backdrop-blur-sm text-chapp-gray-200 px-6 py-3 rounded-full text-body-md font-medium mb-8 animate-fade-in shadow-chapp border border-chapp-white/20">
+          <div className="inline-flex items-center gap-2 bg-chapp-accent-blue/20 text-chapp-accent-blue px-6 py-3 rounded-full text-body-md font-medium mb-8 animate-fade-in shadow-chapp border border-chapp-accent-blue/30">
             <div className="w-2 h-2 bg-chapp-accent-blue rounded-full animate-glow"></div>
             ✨ {t('Dove le idee prendono vita digitale')}
           </div>

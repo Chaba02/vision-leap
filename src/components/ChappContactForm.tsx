@@ -42,8 +42,41 @@ const ChappContactForm = () => {
 
     setStatus('loading');
 
-    // Simulation of form submission
-    setTimeout(() => {
+    try {
+      // Invio email usando un servizio di email
+      const emailData = {
+        to: 'omarchaabani22@gmail.com',
+        subject: `Nuova richiesta di consulenza da ${formData.name}`,
+        html: `
+          <h2>Nuova richiesta di consulenza</h2>
+          <p><strong>Nome:</strong> ${formData.name}</p>
+          <p><strong>Email:</strong> ${formData.email}</p>
+          <p><strong>Azienda:</strong> ${formData.company || 'Non specificata'}</p>
+          <p><strong>Messaggio:</strong></p>
+          <p>${formData.message.replace(/\n/g, '<br>')}</p>
+          <hr>
+          <p><small>Messaggio inviato dal sito web il ${new Date().toLocaleString('it-IT')}</small></p>
+        `,
+        text: `
+          Nuova richiesta di consulenza
+          
+          Nome: ${formData.name}
+          Email: ${formData.email}
+          Azienda: ${formData.company || 'Non specificata'}
+          
+          Messaggio:
+          ${formData.message}
+          
+          Messaggio inviato dal sito web il ${new Date().toLocaleString('it-IT')}
+        `
+      };
+
+      // Per ora simuliamo l'invio - in produzione useresti un servizio come EmailJS o un backend
+      console.log('Email da inviare:', emailData);
+      
+      // Simulazione di una chiamata API
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
       setStatus('success');
       setFormData({
         name: '',
@@ -51,8 +84,13 @@ const ChappContactForm = () => {
         company: '',
         message: ''
       });
+      
       setTimeout(() => setStatus('idle'), 3000);
-    }, 1500);
+    } catch (error) {
+      console.error('Errore nell\'invio:', error);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -74,7 +112,7 @@ const ChappContactForm = () => {
       <div className="container-chapp-narrow">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-chapp-accent-blue/20 text-chapp-accent-blue px-4 py-2 rounded-full text-body-sm font-semibold mb-6">
+          <div className="inline-flex items-center gap-2 bg-chapp-accent-blue/20 text-chapp-accent-blue px-4 py-2 rounded-full text-body-sm font-semibold mb-6 border border-chapp-accent-blue/30">
             {t('Contattaci')}
           </div>
           <h2 className="text-display-md text-chapp-title mb-6">
@@ -99,6 +137,15 @@ const ChappContactForm = () => {
               <CheckCircle className="text-green-400" size={20} />
               <p className="text-green-400">
                 Messaggio inviato con successo! Ti contatteremo presto.
+              </p>
+            </div>
+          )}
+
+          {status === 'error' && (
+            <div className="mb-8 p-4 bg-red-900/20 border border-red-500/30 rounded-2xl flex items-center gap-3">
+              <AlertCircle className="text-red-400" size={20} />
+              <p className="text-red-400">
+                Errore nell'invio del messaggio. Riprova più tardi.
               </p>
             </div>
           )}
