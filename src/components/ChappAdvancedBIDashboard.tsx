@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { 
   BarChart3, TrendingUp, Users, DollarSign, Filter, Calendar, Download, RefreshCw,
@@ -17,7 +16,59 @@ const ChappAdvancedBIDashboard = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [animateCharts, setAnimateCharts] = useState(false);
 
-  // Mock data that updates based on filters
+  // Chart configurations for shadcn/ui charts
+  const revenueChartConfig = {
+    value: {
+      label: "Revenue",
+      color: "#3b82f6",
+    },
+  };
+
+  const performanceChartConfig = {
+    performance: {
+      label: "Performance",
+      color: "#3b82f6",
+    },
+  };
+
+  const trafficChartConfig = {
+    users: {
+      label: "Users",
+      color: "#3b82f6",
+    },
+    sessions: {
+      label: "Sessions",
+      color: "#10b981",
+    },
+    conversions: {
+      label: "Conversions",
+      color: "#f59e0b",
+    },
+  };
+
+  const pieChartConfig = {
+    "Sviluppo Web-App": {
+      label: "Sviluppo Web-App",
+      color: "#2563eb",
+    },
+    "Business Intelligence": {
+      label: "Business Intelligence", 
+      color: "#3b82f6",
+    },
+    "Consulenza Strategica": {
+      label: "Consulenza Strategica",
+      color: "#10b981",
+    },
+    "Manutenzione & Support": {
+      label: "Manutenzione & Support",
+      color: "#f59e0b",
+    },
+    "R&D Innovazione": {
+      label: "R&D Innovazione",
+      color: "#8b5cf6",
+    },
+  };
+
   const generateRevenueData = () => {
     const baseData = [
       { month: 'Gen', value: 125000 },
@@ -336,29 +387,22 @@ const ChappAdvancedBIDashboard = () => {
                     </div>
                     
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
+                      <ChartContainer config={revenueChartConfig}>
                         <LineChart data={revenueData}>
                           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
                           <XAxis dataKey="month" stroke="rgba(255,255,255,0.6)" />
                           <YAxis stroke="rgba(255,255,255,0.6)" />
-                          <ChartTooltip 
-                            content={<ChartTooltipContent />}
-                            contentStyle={{
-                              backgroundColor: 'rgba(0,0,0,0.8)',
-                              border: '1px solid rgba(255,255,255,0.2)',
-                              borderRadius: '12px'
-                            }}
-                          />
+                          <ChartTooltip content={<ChartTooltipContent />} />
                           <Line 
                             type="monotone" 
                             dataKey="value" 
-                            stroke="#3b82f6" 
+                            stroke="var(--color-value)"
                             strokeWidth={3}
-                            dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4 }}
-                            activeDot={{ r: 6, stroke: '#3b82f6', strokeWidth: 2 }}
+                            dot={{ fill: "var(--color-value)", strokeWidth: 2, r: 4 }}
+                            activeDot={{ r: 6, stroke: "var(--color-value)", strokeWidth: 2 }}
                           />
                         </LineChart>
-                      </ResponsiveContainer>
+                      </ChartContainer>
                     </div>
                   </div>
 
@@ -367,16 +411,8 @@ const ChappAdvancedBIDashboard = () => {
                     <h4 className="text-heading-md text-chapp-white mb-6">Budget Distribution</h4>
                     
                     <div className="h-64">
-                      <ResponsiveContainer width="100%" height="100%">
+                      <ChartContainer config={pieChartConfig}>
                         <RechartsPieChart>
-                          <defs>
-                            {pieData.map((entry, index) => (
-                              <linearGradient key={index} id={`gradient-${index}`} x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor={entry.color} stopOpacity={0.8}/>
-                                <stop offset="100%" stopColor={entry.color} stopOpacity={0.6}/>
-                              </linearGradient>
-                            ))}
-                          </defs>
                           <RechartsPieChart 
                             data={pieData} 
                             cx="50%" 
@@ -387,7 +423,7 @@ const ChappAdvancedBIDashboard = () => {
                             {pieData.map((entry, index) => (
                               <Cell 
                                 key={`cell-${index}`} 
-                                fill={`url(#gradient-${index})`}
+                                fill={entry.color}
                                 stroke="rgba(255,255,255,0.1)"
                                 strokeWidth={1}
                               />
@@ -409,7 +445,7 @@ const ChappAdvancedBIDashboard = () => {
                             }}
                           />
                         </RechartsPieChart>
-                      </ResponsiveContainer>
+                      </ChartContainer>
                     </div>
 
                     <div className="space-y-2 mt-4">
@@ -433,32 +469,19 @@ const ChappAdvancedBIDashboard = () => {
                     <h4 className="text-heading-md text-chapp-white mb-6">Performance per Settore</h4>
                     
                     <div className="h-48">
-                      <ResponsiveContainer width="100%" height="100%">
+                      <ChartContainer config={performanceChartConfig}>
                         <BarChart data={performanceData}>
                           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
                           <XAxis dataKey="sector" stroke="rgba(255,255,255,0.6)" />
                           <YAxis stroke="rgba(255,255,255,0.6)" />
-                          <ChartTooltip 
-                            content={<ChartTooltipContent />}
-                            contentStyle={{
-                              backgroundColor: 'rgba(0,0,0,0.8)',
-                              border: '1px solid rgba(255,255,255,0.2)',
-                              borderRadius: '12px'
-                            }}
-                          />
+                          <ChartTooltip content={<ChartTooltipContent />} />
                           <Bar 
                             dataKey="performance" 
-                            fill="url(#barGradient)"
+                            fill="var(--color-performance)"
                             radius={[4, 4, 0, 0]}
                           />
-                          <defs>
-                            <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.8}/>
-                              <stop offset="100%" stopColor="#1d4ed8" stopOpacity={0.6}/>
-                            </linearGradient>
-                          </defs>
                         </BarChart>
-                      </ResponsiveContainer>
+                      </ChartContainer>
                     </div>
                   </div>
 
@@ -467,45 +490,38 @@ const ChappAdvancedBIDashboard = () => {
                     <h4 className="text-heading-md text-chapp-white mb-6">Traffic Analytics</h4>
                     
                     <div className="h-48">
-                      <ResponsiveContainer width="100%" height="100%">
+                      <ChartContainer config={trafficChartConfig}>
                         <AreaChart data={trafficData}>
                           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
                           <XAxis dataKey="day" stroke="rgba(255,255,255,0.6)" />
                           <YAxis stroke="rgba(255,255,255,0.6)" />
-                          <ChartTooltip 
-                            content={<ChartTooltipContent />}
-                            contentStyle={{
-                              backgroundColor: 'rgba(0,0,0,0.8)',
-                              border: '1px solid rgba(255,255,255,0.2)',
-                              borderRadius: '12px'
-                            }}
-                          />
+                          <ChartTooltip content={<ChartTooltipContent />} />
                           <Area 
                             type="monotone" 
                             dataKey="users" 
                             stackId="1"
-                            stroke="#3b82f6" 
-                            fill="#3b82f6"
+                            stroke="var(--color-users)"
+                            fill="var(--color-users)"
                             fillOpacity={0.3}
                           />
                           <Area 
                             type="monotone" 
                             dataKey="sessions" 
                             stackId="1"
-                            stroke="#10b981" 
-                            fill="#10b981"
+                            stroke="var(--color-sessions)"
+                            fill="var(--color-sessions)"
                             fillOpacity={0.3}
                           />
                           <Area 
                             type="monotone" 
                             dataKey="conversions" 
                             stackId="1"
-                            stroke="#f59e0b" 
-                            fill="#f59e0b"
+                            stroke="var(--color-conversions)"
+                            fill="var(--color-conversions)"
                             fillOpacity={0.3}
                           />
                         </AreaChart>
-                      </ResponsiveContainer>
+                      </ChartContainer>
                     </div>
                   </div>
                 </div>
