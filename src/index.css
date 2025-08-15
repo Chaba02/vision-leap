@@ -1,49 +1,131 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Dark Mode Premium Design System */
+/* Moschea di Cantù Design System
+   Primary: Pure White (#FFFFFF) - serenity and lightness
+   Secondary: Mediterranean Blue (#006994) - for accents and buttons
+   Typography: Amiri for headings (Arabic-inspired), Lato for body text
+   All colors MUST be HSL.
+*/
+
 @layer base {
   :root {
-    --background: 0 0% 7%;
-    --foreground: 0 0% 100%;
+/* Core colors - Moschea theme */
+    --background: 0 0% 100%;
+    --foreground: 210 15% 20%;
 
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 15% 20%;
 
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 15% 20%;
 
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 7%;
+    /* Facebook Blue primary (#1877F2) */
+    --primary: 220 93% 53%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 100%;
+    /* Soft secondary colors */
+    --secondary: 220 20% 96%;
+    --secondary-foreground: 220 93% 53%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 64%;
+    --muted: 220 15% 97%;
+    --muted-foreground: 210 15% 50%;
 
-    --accent: 212 95% 54%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 220 25% 94%;
+    --accent-foreground: 220 93% 53%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 212 95% 54%;
+    --border: 200 15% 90%;
+    --input: 200 15% 95%;
+    --ring: 220 93% 53%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 9%;
-    --sidebar-foreground: 0 0% 82%;
-    --sidebar-primary: 0 0% 100%;
-    --sidebar-primary-foreground: 0 0% 9%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 212 95% 54%;
+    /* Custom design tokens */
+    --mosque-blue: 220 93% 53%;
+    --mosque-blue-light: 220 50% 85%;
+    --mosque-blue-dark: 220 93% 40%;
+    --pure-white: 0 0% 100%;
+    --warm-gray: 210 10% 40%;
+    --soft-gray: 210 8% 60%;
+
+    /* Typography scale - Apple inspired */
+    --font-heading: -apple-system, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+    --font-body: -apple-system, 'SF Pro Text', 'Inter', system-ui, sans-serif;
+    
+/* Apple SF Pro design tokens */
+    --font-sf-pro: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+    --glass-bg: 255 255 255 / 0.8;
+    --glass-border: 255 255 255 / 0.2;
+    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --warm-white: 0 0% 99%;
+    --cool-gray: 220 9% 46%;
+
+    /* Spacing and shadows for mosque aesthetic */
+    --shadow-mosque: 0 4px 20px hsla(220, 93%, 53%, 0.1);
+    --shadow-soft: 0 2px 10px hsla(210, 15%, 0%, 0.05);
+    --gradient-mosque: linear-gradient(135deg, hsl(var(--pure-white)), hsl(var(--mosque-blue-light)));
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -52,278 +134,59 @@
     @apply border-border;
   }
 
-  body {
-    @apply bg-chapp-dark-bg text-chapp-white font-sans antialiased;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
-  }
-
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6rem; /* Account for fixed header */
   }
 
-  /* Dark mode selection */
-  ::selection {
-    @apply bg-chapp-accent-blue/30;
-  }
-
-  /* Custom select styling */
-  select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23d1d5db' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-    background-position: right 0.5rem center;
-    background-repeat: no-repeat;
-    background-size: 1.5em 1.5em;
-    padding-right: 2.5rem;
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
   }
 }
 
-/* Dark Mode Premium Component Variants */
 @layer components {
-  /* Button Variants - Dark Mode */
-  .btn-chapp-primary {
-    @apply inline-flex items-center justify-center px-8 py-4 bg-chapp-white text-chapp-dark-bg font-medium rounded-2xl text-body-lg hover:bg-chapp-gray-100 active:bg-chapp-gray-200 transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-chapp-accent-blue focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-chapp-md hover:shadow-chapp-lg;
+  /* Apple-inspired animated underline */
+  .link-underline {
+    @apply relative overflow-hidden;
   }
-
-  .btn-chapp-secondary {
-    @apply inline-flex items-center justify-center px-8 py-4 bg-transparent text-chapp-white border-2 border-chapp-white font-medium rounded-2xl text-body-lg hover:bg-chapp-white hover:text-chapp-dark-bg active:bg-chapp-gray-100 transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-chapp-white focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-chapp;
-  }
-
-  .btn-chapp-accent {
-    @apply inline-flex items-center justify-center px-8 py-4 bg-chapp-accent-blue text-chapp-white font-medium rounded-2xl text-body-lg hover:bg-chapp-accent-blue-dark active:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue focus:ring-2 focus:ring-chapp-accent-blue focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-chapp-md;
-  }
-
-  .btn-chapp-small {
-    @apply inline-flex items-center justify-center px-4 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-sm hover:bg-chapp-accent-blue-dark active:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue focus:ring-2 focus:ring-chapp-accent-blue focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-chapp;
-  }
-
-  .btn-chapp-ghost {
-    @apply inline-flex items-center justify-center px-6 py-3 text-chapp-gray-300 font-medium text-body-lg hover:text-chapp-white hover:bg-chapp-dark-card rounded-xl transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-chapp-gray-500 focus:ring-offset-2 focus:ring-offset-chapp-dark-bg;
-  }
-
-  /* Card Variants - Dark Mode Premium */
-  .card-chapp {
-    @apply bg-chapp-dark-card/95 backdrop-blur-xl rounded-3xl shadow-chapp-lg border border-chapp-dark-border/60 overflow-hidden transition-all duration-500 hover:shadow-chapp-xl hover:-translate-y-2 hover:scale-[1.02] hover:bg-chapp-dark-card;
-  }
-
-  .card-glass-dark {
-    @apply bg-chapp-dark-card/70 backdrop-blur-xl rounded-3xl shadow-glass-dark border border-chapp-white/10 overflow-hidden transition-all duration-500 hover:bg-chapp-dark-card/80 hover:shadow-chapp-xl hover:-translate-y-1 hover:scale-[1.02];
-  }
-
-  .card-premium-dark {
-    @apply bg-gradient-to-br from-chapp-dark-card via-chapp-gray-900 to-chapp-dark-card rounded-3xl shadow-chapp-lg border border-chapp-dark-border/80 overflow-hidden transition-all duration-500 hover:shadow-chapp-xl hover:-translate-y-2 hover:scale-[1.02] hover:from-chapp-dark-card hover:via-chapp-dark-card hover:to-chapp-dark-card;
-  }
-
-  /* Text Variants - Dark Mode */
-  .text-chapp-hero {
-    @apply font-display font-semibold tracking-tight text-chapp-white;
-  }
-
-  .text-chapp-title {
-    @apply font-display font-semibold text-chapp-white;
-  }
-
-  .text-chapp-body {
-    @apply text-chapp-gray-300 leading-relaxed;
-  }
-
-  .text-chapp-caption {
-    @apply text-chapp-gray-400 font-medium;
-  }
-
-  /* Layout Variants - Enhanced Padding */
-  .section-chapp {
-    @apply py-24 sm:py-32;
-  }
-
-  .section-chapp-sm {
-    @apply py-16 sm:py-20;
-  }
-
-  .container-chapp {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  .container-chapp-narrow {
-    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  /* Dark Glassmorphism Effect */
-  .glass-dark {
-    @apply bg-chapp-white/5 backdrop-blur-xl border border-chapp-white/10 shadow-glass-dark;
-  }
-
-  /* Animation Classes */
-  .animate-on-scroll {
-    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
-  }
-
-  .animate-on-scroll.in-view {
-    @apply opacity-100 translate-y-0;
-  }
-
-  /* Hover Effects - Dark Mode */
-  .hover-lift-dark {
-    @apply transition-all duration-500 hover:-translate-y-3 hover:shadow-chapp-xl;
-  }
-
-  .hover-scale-dark {
-    @apply transition-transform duration-300 hover:scale-[1.02];
-  }
-
-  .hover-glow-blue {
-    @apply transition-all duration-300 hover:shadow-glow-blue;
-  }
-
-  /* Form Styles - Dark Mode */
-  .form-chapp {
-    @apply w-full px-5 py-4 rounded-2xl border border-chapp-dark-border bg-chapp-dark-card/95 backdrop-blur-sm text-chapp-white placeholder:text-chapp-gray-500 focus:ring-2 focus:ring-chapp-accent-blue focus:border-chapp-accent-blue transition-all duration-300 shadow-chapp hover:shadow-chapp-md focus:shadow-chapp-lg;
-  }
-
-  .form-textarea-chapp {
-    @apply w-full px-5 py-4 rounded-2xl border border-chapp-dark-border bg-chapp-dark-card/95 backdrop-blur-sm text-chapp-white placeholder:text-chapp-gray-500 focus:ring-2 focus:ring-chapp-accent-blue focus:border-chapp-accent-blue transition-all duration-300 shadow-chapp hover:shadow-chapp-md focus:shadow-chapp-lg resize-none;
-  }
-
-  /* Link Hover Effects - Dark Mode */
-  .link-hover-dark {
-    @apply relative transition-colors duration-300 hover:text-chapp-accent-blue;
-  }
-
-  .link-hover-dark::after {
-    @apply absolute -bottom-0.5 left-0 w-0 h-0.5 bg-chapp-accent-blue transition-all duration-300;
+  
+  .link-underline::after {
     content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary transform -translate-x-full transition-transform duration-300 ease-out;
   }
-
-  .link-hover-dark:hover::after {
-    @apply w-full;
+  
+  .link-underline:hover::after {
+    @apply translate-x-0;
   }
-
-  /* Advanced Dashboard Elements */
-  .dashboard-card {
-    @apply bg-chapp-white/5 backdrop-blur-sm border border-chapp-white/10 rounded-2xl transition-all duration-300 hover:bg-chapp-white/10 hover:scale-105;
+  
+  /* Glassmorphism button */
+  .glass-button {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg hover:bg-white/90 transition-all duration-300 ease-out;
   }
-
-  .chart-bar {
-    @apply bg-gradient-to-t from-chapp-accent-blue to-chapp-accent-blue-light rounded-t-lg transition-all duration-1000;
+  
+  /* Mobile menu animations */
+  .mobile-menu-enter {
+    @apply opacity-0 transform translate-y-2;
+    animation: mobile-menu-slide-in 0.3s ease-out forwards;
   }
-
-  .filter-select {
-    @apply bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-xl text-chapp-white focus:ring-2 focus:ring-chapp-accent-blue focus:border-chapp-accent-blue transition-all duration-300;
+  
+  .mobile-menu-exit {
+    @apply opacity-100 transform translate-y-0;
+    animation: mobile-menu-slide-out 0.3s ease-out forwards;
   }
-
-  /* Advanced Sidebar Styles */
-  .sidebar-item {
-    @apply flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 hover:bg-chapp-white/10;
+  
+  @keyframes mobile-menu-slide-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-
-  .sidebar-item.active {
-    @apply bg-chapp-accent-blue/20 text-chapp-white border border-chapp-accent-blue/40;
+  
+  @keyframes mobile-menu-slide-out {
+    to {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
   }
-
-  /* Advanced Filter Styles */
-  .filter-chip {
-    @apply bg-chapp-accent-blue/20 text-chapp-white px-3 py-1 rounded-lg text-body-sm flex items-center gap-2 transition-all duration-300 hover:bg-chapp-accent-blue/30;
-  }
-
-  /* Toggle Switch Styles */
-  .toggle-switch {
-    @apply relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-chapp-accent-blue focus:ring-offset-2 focus:ring-offset-chapp-dark-bg;
-  }
-
-  .toggle-switch.active {
-    @apply bg-chapp-accent-blue;
-  }
-
-  .toggle-switch.inactive {
-    @apply bg-chapp-gray-600;
-  }
-
-  .toggle-thumb {
-    @apply inline-block h-4 w-4 transform rounded-full bg-white transition-transform;
-  }
-
-  .toggle-thumb.active {
-    @apply translate-x-6;
-  }
-
-  .toggle-thumb.inactive {
-    @apply translate-x-1;
-  }
-
-  /* Chart Container Enhancements */
-  .chart-container {
-    @apply relative overflow-hidden rounded-xl;
-  }
-
-  .chart-tooltip {
-    @apply bg-black/90 border border-white/20 rounded-lg p-3 shadow-xl backdrop-blur-sm;
-  }
-
-  /* Real-time Indicators */
-  .realtime-indicator {
-    @apply flex items-center gap-2;
-  }
-
-  .realtime-dot {
-    @apply w-2 h-2 bg-green-400 rounded-full animate-pulse;
-  }
-
-  /* Export Button Styles */
-  .export-btn {
-    @apply inline-flex items-center gap-2 px-4 py-2 bg-chapp-white/10 hover:bg-chapp-white/20 border border-chapp-white/20 text-chapp-white rounded-xl transition-all duration-300 hover:scale-105;
-  }
-}
-
-/* Dark Mode Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-chapp-dark-bg;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-chapp-gray-700 rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-chapp-gray-600;
-}
-
-/* Smooth transitions for all interactive elements */
-a, button, [role="button"], select {
-  @apply transition-all duration-300;
-}
-
-/* Dark mode focus styles */
-*:focus-visible {
-  @apply ring-2 ring-chapp-accent-blue ring-offset-2 ring-offset-chapp-dark-bg outline-none;
-}
-
-/* Enhanced animations for BI Dashboard */
-@keyframes data-update {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-.animate-data-update {
-  animation: data-update 0.6s ease-in-out;
-}
-
-/* Loading states */
-.loading-shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
 }

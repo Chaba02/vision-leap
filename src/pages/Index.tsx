@@ -1,49 +1,27 @@
-
-import React, { useEffect } from 'react';
-import { LanguageProvider } from '../contexts/LanguageContext';
-import ChappNavbar from '../components/ChappNavbar';
-import ChappHero from '../components/ChappHero';
-import ChappAbout from '../components/ChappAbout';
-import ChappSimpleBIDashboard from '../components/ChappSimpleBIDashboard';
-import ChappServices from '../components/ChappServices';
-import ChappContactForm from '../components/ChappContactForm';
-import ChappFooter from '../components/ChappFooter';
+import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
+import ChiSiamoSection from "@/components/ChiSiamoSection";
+import PrayerSection from "@/components/PrayerSection";
+import EventiSection from "@/components/EventiSection";
+import DonazioniSection from "@/components/DonazioniSection";
+import ContattiSection from "@/components/ContattiSection";
+import Footer from "@/components/Footer";
+import ChappFooter from "@/components/ChappFooter";
 
 const Index = () => {
-  useEffect(() => {
-    // Enhanced Intersection Observer for scroll animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -80px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-        }
-      });
-    }, observerOptions);
-
-    // Observe all elements with animate-on-scroll class
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
-    animatedElements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <LanguageProvider>
-      <div className="min-h-screen bg-chapp-dark-bg overflow-x-hidden">
-        <ChappNavbar />
-        <ChappHero />
-        <ChappAbout />
-        <ChappSimpleBIDashboard />
-        <ChappServices />
-        <ChappContactForm />
-        <ChappFooter />
-      </div>
-    </LanguageProvider>
+    <div className="min-h-screen bg-pure-white">
+      <Header />
+      <main>
+        <HeroSection />
+        <ChiSiamoSection />
+        <PrayerSection />
+        <EventiSection />
+        <DonazioniSection />
+        <ContattiSection />
+      </main>
+      <ChappFooter />
+    </div>
   );
 };
 

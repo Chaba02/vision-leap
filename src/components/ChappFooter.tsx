@@ -1,37 +1,16 @@
-
 import React from 'react';
 
 const ChappFooter = () => {
   return (
-    <footer className="bg-chapp-black py-8 px-6 sm:px-8 lg:px-20">
-      <div className="container-chapp">
+    <footer className="bg-primary py-8 px-6 sm:px-8 lg:px-20">
+      <div className="container-chapp text-white/75 text-[13px]">
         <div className="text-center">
-          <p className="text-body-sm text-chapp-gray-400">
-            © 2025 Chapp. Tutti i diritti riservati.
+          <p className="text-body-sm">
+            © 2025 Centro Islamico Assalam Cantù.
           </p>
-          <div className="flex justify-center items-center gap-6 mt-4">
-            <a
-              href="#"
-              className="text-body-sm text-chapp-gray-500 hover:text-chapp-gray-300 transition-colors duration-300"
-            >
-              Privacy Policy
-            </a>
-            <span className="w-1 h-1 bg-chapp-gray-600 rounded-full"></span>
-            <a
-              href="#"
-              className="text-body-sm text-chapp-gray-500 hover:text-chapp-gray-300 transition-colors duration-300"
-            >
-              Termini di Servizio
-            </a>
-            <span className="w-1 h-1 bg-chapp-gray-600 rounded-full"></span>
-            <a
-              href="#"
-              className="text-body-sm text-chapp-gray-500 hover:text-chapp-gray-300 transition-colors duration-300"
-            >
-              Cookie Policy
-            </a>
-          </div>
-          
+          <p className="mt-3 text-[15px]">
+            أسلم عليكم و رحمتلا و بركاتم
+          </p>
         </div>
       </div>
     </footer>
