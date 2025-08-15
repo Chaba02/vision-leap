@@ -5,9 +5,9 @@ import SectionHeader from "./SectionHeader";
 
 const getIslamicDate = (): string => {
   try {
-    const options: Intl.DateTimeFormatOptions = { 
-      day: "numeric", 
-      month: "long", 
+    const options: Intl.DateTimeFormatOptions = {
+      day: "numeric",
+      month: "long",
       year: "numeric",
       calendar: "islamic"
     };
@@ -99,7 +99,7 @@ const PrayerSection = () => {
   return (
     <section id="preghiere" className="min-h-screen bg-white py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <SectionHeader 
+        <SectionHeader
           title="Orari delle Preghiere"
           subtitle="Consulta gli orari giornalieri per Cantù, la data islamica e il tempo rimanente alla prossima preghiera."
           className="mb-16 sm:mb-24"
@@ -114,7 +114,7 @@ const PrayerSection = () => {
             { title: "Prossima Preghiera", value: `${nextPrayer?.name} - ${nextPrayer?.time}`, icon: Compass },
             { title: "Tempo Rimanente", value: countdown, icon: Clock, gradient: true }
           ].map((card, idx) => (
-            <motion.div 
+            <motion.div
               key={idx}
               className="group"
               initial={{ opacity: 0, y: 20 }}
@@ -141,7 +141,7 @@ const PrayerSection = () => {
         </div>
 
         {/* Table Responsive */}
-        <motion.div 
+        <motion.div
           className="bg-white rounded-3xl shadow-lg border-2 border-gray-300 overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -154,7 +154,7 @@ const PrayerSection = () => {
               Orari per Cantù - {new Date().toLocaleDateString("it-IT", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
             </h3>
           </div>
-          
+
           <div className="overflow-x-auto">
             <table className="w-full text-sm sm:text-base min-w-[500px]">
               <thead className="bg-neutral-50">
@@ -170,7 +170,7 @@ const PrayerSection = () => {
                   const IconComponent = getPrayerIcon(prayer.name);
                   const isNext = nextPrayer?.name === prayer.name;
                   return (
-                    <motion.tr 
+                    <motion.tr
                       key={prayer.name}
                       className={`transition-all duration-200 hover:bg-neutral-50 ${isNext ? 'bg-primary/5 border-l-4 border-primary' : ''}`}
                       initial={{ opacity: 0, x: -20 }}
@@ -208,17 +208,7 @@ const PrayerSection = () => {
           </div>
         </motion.div>
 
-        <motion.div 
-          className="mt-6 sm:mt-8 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-xs sm:text-sm text-neutral-600 bg-neutral-50 rounded-lg px-3 sm:px-4 py-2 inline-block border border-neutral-200">
-            💡 Gli orari potrebbero variare leggermente in base alle condizioni astronomiche locali
-          </p>
-        </motion.div>
+
       </div>
     </section>
   );
