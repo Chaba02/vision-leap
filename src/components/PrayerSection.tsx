@@ -3,6 +3,21 @@ import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
 import SectionHeader from "./SectionHeader";
 
+const prayerMeta: Record<string, { arabic: string; offset: number; after: number }> = {
+  Fajr: { arabic: "الفجر", offset: -23, after: 20 },
+  Dhuhr: { arabic: "الظهر", offset: 0, after: 15 },
+  Asr: { arabic: "العصر", offset: 0, after: 15 },
+  Maghrib: { arabic: "المغرب", offset: 0, after: 10 },
+  Isha: { arabic: "العشاء", offset: 21, after: 0 },
+};
+
+const applyOffset = (time: string, offset: number) => {
+  const [h, m] = time.split(":").map(Number);
+  const date = new Date();
+  date.setHours(h, m + offset, 0, 0);
+  return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+};
+
 const getIslamicDate = (): string => {
   try {
     const options: Intl.DateTimeFormatOptions = {
@@ -37,62 +52,79 @@ interface PrayerTime {
 }
 
 const PrayerSection = () => {
-  const prayerTimes: PrayerTime[] = useMemo(() => [
-    { name: "Fajr", arabicName: "الفجر", time: "05:15", description: "Alba" },
-    { name: "Dhuhr", arabicName: "الظهر", time: "13:20", description: "Mezzogiorno" },
-    { name: "Asr", arabicName: "العصر", time: "17:00", description: "Pomeriggio" },
-    { name: "Maghrib", arabicName: "المغرب", time: "20:15", description: "Tramonto" },
-    { name: "Isha", arabicName: "العشاء", time: "21:45", description: "Sera" },
-  ], []);
-
+  const [prayerTimes, setPrayerTimes] = useState<PrayerTime[]>([]);
   const [islamicDate, setIslamicDate] = useState<string>("");
   const [nextPrayer, setNextPrayer] = useState<PrayerTime | null>(null);
   const [countdown, setCountdown] = useState<string>("");
   const [currentTime, setCurrentTime] = useState<string>("");
 
   useEffect(() => {
-    const findNextPrayer = (): PrayerTime | null => {
-      const now = new Date();
-      let upcoming: PrayerTime | null = null;
+    setIslamicDate(getIslamicDate());
+  }, []);
 
+  useEffect(() => {
+    const fetchPrayerTimes = async () => {
+      const date = new Date();
+      const formattedDate = date.toLocaleDateString("it-IT")
+        .split("/").map(p => p.padStart(2, "0")).join("-");
+
+      try {
+        const res = await fetch(`https://api.aladhan.com/v1/timings/${formattedDate}?latitude=45.72556&longitude=9.14770`);
+        const data = await res.json();
+
+        if (data?.data?.timings) {
+          const timings = data.data.timings;
+          const mapped = Object.keys(prayerMeta).map(key => ({
+            name: key,
+            arabicName: prayerMeta[key].arabic,
+            time: applyOffset(timings[key], prayerMeta[key].offset),
+            description: `+${prayerMeta[key].after} min dopo`,
+          }));
+          setPrayerTimes(mapped);
+        }
+      } catch (err) {
+        console.error("Errore fetch orari preghiera:", err);
+      }
+    };
+
+    fetchPrayerTimes();
+  }, []);
+
+  useEffect(() => {
+    if (prayerTimes.length === 0) return;
+
+    const updateCountdown = () => {
+      const now = new Date();
+      setCurrentTime(now.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit", second: "2-digit" }));
+
+      let next: PrayerTime | null = null;
       for (const prayer of prayerTimes) {
-        const [hours, minutes] = prayer.time.split(":").map(Number);
+        const [h, m] = prayer.time.split(":").map(Number);
         const prayerDate = new Date();
-        prayerDate.setHours(hours, minutes, 0, 0);
+        prayerDate.setHours(h, m, 0, 0);
         if (prayerDate > now) {
-          upcoming = prayer;
+          next = prayer;
           break;
         }
       }
-      return upcoming || prayerTimes[0];
-    };
+      if (!next) next = prayerTimes[0];
 
-    const calculateCountdown = (prayer: PrayerTime | null): string => {
-      if (!prayer) return "00:00:00";
-      const now = new Date();
-      const [hours, minutes] = prayer.time.split(":").map(Number);
+      setNextPrayer(next);
+
+      const [hours, minutes] = next.time.split(":").map(Number);
       const target = new Date();
       target.setHours(hours, minutes, 0, 0);
       if (target < now) target.setDate(target.getDate() + 1);
+
       const diff = target.getTime() - now.getTime();
       const hrs = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, "0");
       const mins = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, "0");
       const secs = String(Math.floor((diff / 1000) % 60)).padStart(2, "0");
-      return `${hrs}:${mins}:${secs}`;
+      setCountdown(`${hrs}:${mins}:${secs}`);
     };
 
-    setIslamicDate(getIslamicDate());
-
-    const updateTime = () => {
-      const now = new Date();
-      setCurrentTime(now.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit", second: "2-digit" }));
-      const next = findNextPrayer();
-      setNextPrayer(next);
-      setCountdown(calculateCountdown(next));
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
     return () => clearInterval(interval);
   }, [prayerTimes]);
 
@@ -105,13 +137,11 @@ const PrayerSection = () => {
           className="mb-16 sm:mb-24"
         />
 
-        {/* Grid Card Responsive */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 sm:mb-16">
-          {/* Card component mapping to avoid repetition */}
           {[
             { title: "Ora Attuale", value: currentTime, icon: Clock },
             { title: "Data Islamica", value: islamicDate, icon: Calendar },
-            { title: "Prossima Preghiera", value: `${nextPrayer?.name} - ${nextPrayer?.time}`, icon: Compass },
+            { title: "Prossima Preghiera", value: nextPrayer ? `${nextPrayer.name} - ${nextPrayer.time}` : "", icon: Compass },
             { title: "Tempo Rimanente", value: countdown, icon: Clock, gradient: true }
           ].map((card, idx) => (
             <motion.div
@@ -140,7 +170,6 @@ const PrayerSection = () => {
           ))}
         </div>
 
-        {/* Table Responsive */}
         <motion.div
           className="bg-white rounded-3xl shadow-lg border-2 border-gray-300 overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
@@ -155,60 +184,21 @@ const PrayerSection = () => {
             </h3>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm sm:text-base min-w-[500px]">
-              <thead className="bg-neutral-50">
-                <tr>
-                  <th className="py-3 px-4 sm:py-4 sm:px-6 text-left font-semibold text-neutral-700">Preghiera</th>
-                  <th className="py-3 px-4 sm:py-4 sm:px-6 text-left font-semibold text-neutral-700">Nome Arabo</th>
-                  <th className="py-3 px-4 sm:py-4 sm:px-6 text-left font-semibold text-neutral-700">Orario</th>
-                  <th className="py-3 px-4 sm:py-4 sm:px-6 text-left font-semibold text-neutral-700">Descrizione</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-neutral-100">
-                {prayerTimes.map((prayer, index) => {
-                  const IconComponent = getPrayerIcon(prayer.name);
-                  const isNext = nextPrayer?.name === prayer.name;
-                  return (
-                    <motion.tr
-                      key={prayer.name}
-                      className={`transition-all duration-200 hover:bg-neutral-50 ${isNext ? 'bg-primary/5 border-l-4 border-primary' : ''}`}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                    >
-                      <td className="py-3 px-4 sm:py-4 sm:px-6">
-                        <div className="flex items-center gap-2 sm:gap-3">
-                          <IconComponent className={`w-4 h-4 sm:w-5 sm:h-5 ${isNext ? 'text-primary' : 'text-neutral-500'}`} />
-                          <span className={`font-medium ${isNext ? 'text-primary' : 'text-neutral-900'}`}>
-                            {prayer.name}
-                          </span>
-                          {isNext && (
-                            <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium">
-                              Prossima
-                            </span>
-                          )}
-                        </div>
-                      </td>
-                      <td className="py-3 px-4 sm:py-4 sm:px-6 italic text-neutral-600 font-arabic text-lg">
-                        {prayer.arabicName}
-                      </td>
-                      <td className="py-3 px-4 sm:py-4 sm:px-6 font-mono text-base sm:text-lg font-semibold">
-                        {prayer.time}
-                      </td>
-                      <td className="py-3 px-4 sm:py-4 sm:px-6 text-neutral-600 text-xs sm:text-sm">
-                        {prayer.description}
-                      </td>
-                    </motion.tr>
-                  );
-                })}
-              </tbody>
-            </table>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 p-4 sm:p-6">
+            {prayerTimes.map((prayer, idx) => {
+              const Icon = getPrayerIcon(prayer.name);
+              const isNext = nextPrayer?.name === prayer.name;
+              return (
+                <div key={idx} className={`flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl border-2 ${isNext ? "border-primary bg-primary/10" : "border-gray-200"} transition-all`}>
+                  <Icon className={`w-6 h-6 sm:w-7 sm:h-7 mb-2 ${isNext ? "text-primary" : "text-gray-700"}`} />
+                  <span className="text-sm sm:text-base font-semibold">{prayer.arabicName}</span>
+                  <span className="text-lg sm:text-xl font-bold">{prayer.time}</span>
+                  <span className="text-xs sm:text-sm text-gray-500">{prayer.description}</span>
+                </div>
+              );
+            })}
           </div>
         </motion.div>
-
-
       </div>
     </section>
   );
