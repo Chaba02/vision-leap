@@ -10,7 +10,7 @@ export const Navbar = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Location", path: "/about" },
+    { name: "Location", path: "/search" },
     { name: "Servizi", path: "/services" },
     { name: "Recensioni", path: "/reviews" },
     { name: "Contatti", path: "/contact" },
