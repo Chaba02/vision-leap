@@ -116,7 +116,7 @@ export const mockLocations: Location[] = [
   {
     id: "3",
     name: "Riad du Palmier",
-    city: "Tunis",
+    city: "Tunisi",
     type: "riad",
     capacity: 80,
     priceRange: "€2000-3500",

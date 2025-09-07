@@ -30,6 +30,7 @@ const Search = () => {
   useEffect(() => {
     let filtered = [...locations];
 
+
     // Text search across multiple fields
     if (filters.query) {
       const query = filters.query.toLowerCase();
@@ -40,16 +41,27 @@ const Search = () => {
         location.description?.toLowerCase().includes(query) ||
         location.features?.some(feature => feature.toLowerCase().includes(query))
       );
+      
     }
 
-    // City filter
+    // City filter - handle both enum values and string values
     if (filters.city && filters.city !== 'all') {
-      filtered = filtered.filter(location => location.city === filters.city);
+      const cityValue = filters.city.toString();
+      filtered = filtered.filter(location => 
+        location.city === cityValue || 
+        location.city.toLowerCase() === cityValue.toLowerCase()
+      );
+      
     }
 
-    // Venue type filter
+    // Venue type filter - handle both enum values and string values
     if (filters.venueType && filters.venueType !== 'all') {
-      filtered = filtered.filter(location => location.type === filters.venueType);
+      const venueValue = filters.venueType.toString();
+      filtered = filtered.filter(location => 
+        location.type === venueValue || 
+        location.type.toLowerCase() === venueValue.toLowerCase()
+      );
+      
     }
 
     // Price range filter with enhanced logic
