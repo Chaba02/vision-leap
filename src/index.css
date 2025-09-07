@@ -1,75 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Moschea di Cantù Design System
-   Primary: Pure White (#FFFFFF) - serenity and lightness
-   Secondary: Mediterranean Blue (#006994) - for accents and buttons
-   Typography: Amiri for headings (Arabic-inspired), Lato for body text
-   All colors MUST be HSL.
+/* Tunisia Wedding Platform Design System - Apple-inspired with Glassmorphism
+All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-/* Core colors - Moschea theme */
-    --background: 0 0% 100%;
-    --foreground: 210 15% 20%;
+    /* Apple-inspired Base Colors */
+    --background: 220 20% 98%;
+    --foreground: 220 15% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 210 15% 20%;
+    /* Glassmorphism Card System */
+    --glass: 220 30% 98%;
+    --glass-foreground: 220 15% 15%;
+    --glass-border: 220 20% 90%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 210 15% 20%;
-
-    /* Facebook Blue primary (#1877F2) */
-    --primary: 220 93% 53%;
+    --primary: 340 72% 52%;
     --primary-foreground: 0 0% 100%;
+    /* testo bianco sopra primario */
+    --primary-hover: 340 75% 58%;
+    /* hover più chiaro e acceso */
 
-    /* Soft secondary colors */
-    --secondary: 220 20% 96%;
-    --secondary-foreground: 220 93% 53%;
 
-    --muted: 220 15% 97%;
-    --muted-foreground: 210 15% 50%;
+    --secondary: 335 50% 85%;
+    /* rosa pastello delicato */
+    --secondary-foreground: 335 50% 25%;
+    /* testo leggibile scuro */
+    --secondary-hover: 335 55% 75%;
+    /* hover più saturo */
 
-    --accent: 220 25% 94%;
-    --accent-foreground: 220 93% 53%;
 
-    --destructive: 0 84.2% 60.2%;
+
+    /* Muted - Soft Grays */
+    --muted: 220 15% 96%;
+    --muted-foreground: 220 15% 45%;
+
+    --accent: 345, 73%, 50%;
+    --accent-foreground: 0 0% 100%;
+
+
+
+    /* Status Colors */
+    --success: 140 60% 50%;
+    --success-foreground: 0 0% 100%;
+    --warning: 35 90% 60%;
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 75% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 200 15% 90%;
-    --input: 200 15% 95%;
-    --ring: 220 93% 53%;
+    /* UI Elements */
+    --border: 220 20% 88%;
+    --input: 220 20% 95%;
+    --ring: 200 90% 55%;
 
-    --radius: 0.75rem;
+    /* Shadows */
+    --shadow-glass: 0 8px 32px rgba(31, 38, 135, 0.15);
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-elevated: 0 20px 40px rgba(0, 0, 0, 0.12);
 
-    /* Custom design tokens */
-    --mosque-blue: 220 93% 53%;
-    --mosque-blue-light: 220 50% 85%;
-    --mosque-blue-dark: 220 93% 40%;
-    --pure-white: 0 0% 100%;
-    --warm-gray: 210 10% 40%;
-    --soft-gray: 210 8% 60%;
-
-    /* Typography scale - Apple inspired */
-    --font-heading: -apple-system, 'SF Pro Display', 'Inter', system-ui, sans-serif;
-    --font-body: -apple-system, 'SF Pro Text', 'Inter', system-ui, sans-serif;
-    
-/* Apple SF Pro design tokens */
-    --font-sf-pro: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
-    --glass-bg: 255 255 255 / 0.8;
-    --glass-border: 255 255 255 / 0.2;
-    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.1);
-    --warm-white: 0 0% 99%;
-    --cool-gray: 220 9% 46%;
-
-    /* Spacing and shadows for mosque aesthetic */
-    --shadow-mosque: 0 4px 20px hsla(220, 93%, 53%, 0.1);
-    --shadow-soft: 0 2px 10px hsla(210, 15%, 0%, 0.05);
-    --gradient-mosque: linear-gradient(135deg, hsl(var(--pure-white)), hsl(var(--mosque-blue-light)));
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(220, 30%, 98%) 0%, hsl(200, 40%, 95%) 100%);
+    --gradient-glass: linear-gradient(145deg, hsla(220, 30%, 98%, 0.8) 0%, hsla(200, 40%, 95%, 0.6) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(200, 90%, 55%) 0%, hsl(190, 100%, 65%) 100%);
 
     --radius: 0.75rem;
 
@@ -134,59 +128,54 @@
     @apply border-border;
   }
 
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 6rem; /* Account for fixed header */
-  }
-
   body {
-    @apply bg-background text-foreground;
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+    @apply bg-background text-foreground font-sans antialiased;
+    background: var(--gradient-hero);
+    min-height: 100vh;
   }
 }
 
 @layer components {
-  /* Apple-inspired animated underline */
-  .link-underline {
-    @apply relative overflow-hidden;
+
+  /* Glassmorphism Components */
+  .glass-card {
+    @apply bg-glass/80 backdrop-blur-xl border border-glass-border/30 rounded-xl shadow-[var(--shadow-glass)];
   }
-  
-  .link-underline::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary transform -translate-x-full transition-transform duration-300 ease-out;
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 hover:bg-glass/90 hover:shadow-[var(--shadow-elevated)] hover:scale-[1.02];
   }
-  
-  .link-underline:hover::after {
-    @apply translate-x-0;
+
+  /* Apple-style Buttons */
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-accent text-primary-foreground px-6 py-3 rounded-xl font-medium shadow-[var(--shadow-soft)] transition-all duration-200 hover:shadow-[var(--shadow-elevated)] hover:scale-105 active:scale-95;
   }
-  
-  /* Glassmorphism button */
-  .glass-button {
-    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg hover:bg-white/90 transition-all duration-300 ease-out;
+
+  .btn-secondary {
+    @apply bg-secondary/80 backdrop-blur-sm text-secondary-foreground px-6 py-3 rounded-xl font-medium border border-border/50 transition-all duration-200 hover:bg-secondary hover:shadow-[var(--shadow-soft)] hover:scale-105 active:scale-95;
   }
-  
-  /* Mobile menu animations */
-  .mobile-menu-enter {
-    @apply opacity-0 transform translate-y-2;
-    animation: mobile-menu-slide-in 0.3s ease-out forwards;
+
+  /* Search Bar */
+  .search-input {
+    @apply glass-card px-4 py-3 text-foreground placeholder:text-muted-foreground border-0 outline-none ring-0 focus:ring-2 focus:ring-primary/50 transition-all duration-200;
   }
-  
-  .mobile-menu-exit {
-    @apply opacity-100 transform translate-y-0;
-    animation: mobile-menu-slide-out 0.3s ease-out forwards;
+
+  /* Location Cards */
+  .location-card {
+    @apply glass-card-hover overflow-hidden;
   }
-  
-  @keyframes mobile-menu-slide-in {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+
+  /* Verified Badge */
+  .verified-badge {
+    @apply inline-flex items-center gap-1 bg-success/10 text-success px-2 py-1 rounded-full text-xs font-medium backdrop-blur-sm border border-success/20;
   }
-  
-  @keyframes mobile-menu-slide-out {
-    to {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
+
+  /* Typography */
+  .text-hero {
+    @apply text-4xl md:text-6xl font-light tracking-tight;
+  }
+
+  .text-section {
+    @apply text-2xl md:text-3xl font-light tracking-tight;
   }
 }
