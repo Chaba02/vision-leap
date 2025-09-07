@@ -25,15 +25,15 @@ export const LocationCard = ({ location, onClick, variant = 'vertical' }: Locati
 
   if (variant === 'horizontal') {
     return (
-      <div className="location-card cursor-pointer" onClick={handleCardClick}>
-        <div className="flex gap-4">
+      <div className="bg-card border border-border rounded-2xl p-6 cursor-pointer hover:shadow-lg transition-all duration-300" onClick={handleCardClick}>
+        <div className="flex gap-6">
           {/* Image Container */}
-          <div className="relative w-32 h-24 overflow-hidden rounded-lg flex-shrink-0">
+          <div className="relative w-48 h-32 overflow-hidden rounded-xl flex-shrink-0">
             {!imageError ? (
               <img 
                 src={location.image}
                 alt={location.name}
-                className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 onError={() => setImageError(true)}
               />
             ) : (
@@ -48,15 +48,15 @@ export const LocationCard = ({ location, onClick, variant = 'vertical' }: Locati
             {/* Overlay with badges */}
             <div className="absolute top-2 left-2 right-2 flex justify-between items-start">
               {location.verified && (
-                <div className="verified-badge text-xs">
-                  <Shield className="w-2 h-2" />
+                <div className="bg-primary/90 text-primary-foreground text-xs px-2 py-1 rounded-full font-medium">
+                  <Shield className="w-2 h-2 inline mr-1" />
                   Verificato
                 </div>
               )}
               <Button
                 variant="ghost"
                 size="sm"
-                className={`glass-card p-1 ${isLiked ? 'text-red-500' : 'text-white'} hover:scale-110 transition-all duration-200`}
+                className={`bg-background/80 p-1 ${isLiked ? 'text-red-500' : 'text-foreground'} hover:scale-110 transition-all duration-200`}
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsLiked(!isLiked);
@@ -68,17 +68,17 @@ export const LocationCard = ({ location, onClick, variant = 'vertical' }: Locati
 
             {/* Price badge */}
             <div className="absolute bottom-2 right-2">
-              <div className="glass-card px-2 py-1 text-xs font-medium text-foreground">
+              <div className="bg-background/90 px-2 py-1 text-xs font-medium text-foreground rounded-lg">
                 {location.priceRange}
               </div>
             </div>
           </div>
 
           {/* Content */}
-          <div className="flex-1 space-y-2">
+          <div className="flex-1 space-y-3">
             {/* Header */}
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-1">
+              <h3 className="text-xl font-bold text-foreground mb-1">
                 {location.name}
               </h3>
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -95,9 +95,9 @@ export const LocationCard = ({ location, onClick, variant = 'vertical' }: Locati
 
             {/* Rating */}
             <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 bg-yellow-50 dark:bg-yellow-900/20 px-2 py-1 rounded-full">
                 <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                <span className="text-sm font-medium text-foreground">{location.rating}</span>
+                <span className="text-sm font-bold text-yellow-700 dark:text-yellow-300">{location.rating}</span>
               </div>
               <span className="text-sm text-muted-foreground">
                 ({location.reviewCount} recensioni)
@@ -114,13 +114,13 @@ export const LocationCard = ({ location, onClick, variant = 'vertical' }: Locati
               {location.features.slice(0, 3).map((feature, index) => (
                 <span 
                   key={index}
-                  className="text-xs px-2 py-1 bg-secondary/50 text-secondary-foreground rounded-md"
+                  className="text-xs px-3 py-1 bg-primary/10 text-primary rounded-full font-medium"
                 >
                   {feature}
                 </span>
               ))}
               {location.features.length > 3 && (
-                <span className="text-xs px-2 py-1 bg-secondary/50 text-secondary-foreground rounded-md">
+                <span className="text-xs px-3 py-1 bg-muted text-muted-foreground rounded-full font-medium">
                   +{location.features.length - 3} altro
                 </span>
               )}
@@ -128,9 +128,9 @@ export const LocationCard = ({ location, onClick, variant = 'vertical' }: Locati
           </div>
 
           {/* CTA Button */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex items-center">
             <Button 
-              className="btn-secondary"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6"
               onClick={(e) => {
                 e.stopPropagation();
                 handleCardClick();
@@ -145,14 +145,14 @@ export const LocationCard = ({ location, onClick, variant = 'vertical' }: Locati
   }
 
   return (
-    <div className="location-card cursor-pointer" onClick={handleCardClick}>
+    <div className="group bg-card border border-border rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer transform hover:-translate-y-1" onClick={handleCardClick}>
       {/* Image Container */}
-      <div className="relative aspect-[4/3] overflow-hidden rounded-t-xl">
+      <div className="relative aspect-[4/3] overflow-hidden">
         {!imageError ? (
           <img 
             src={location.image}
             alt={location.name}
-            className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             onError={() => setImageError(true)}
           />
         ) : (
@@ -167,15 +167,15 @@ export const LocationCard = ({ location, onClick, variant = 'vertical' }: Locati
         {/* Overlay with badges */}
         <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
           {location.verified && (
-            <div className="verified-badge">
-              <Shield className="w-3 h-3" />
+            <div className="bg-primary/90 text-primary-foreground text-xs px-3 py-1 rounded-full font-medium">
+              <Shield className="w-3 h-3 inline mr-1" />
               Verificato
             </div>
           )}
           <Button
             variant="ghost"
             size="sm"
-            className={`glass-card p-2 ${isLiked ? 'text-red-500' : 'text-white'} hover:scale-110 transition-all duration-200`}
+            className={`bg-background/80 p-2 ${isLiked ? 'text-red-500' : 'text-foreground'} hover:scale-110 transition-all duration-200`}
             onClick={(e) => {
               e.stopPropagation();
               setIsLiked(!isLiked);
@@ -187,44 +187,44 @@ export const LocationCard = ({ location, onClick, variant = 'vertical' }: Locati
 
         {/* Price badge */}
         <div className="absolute bottom-3 right-3">
-          <div className="glass-card px-3 py-1 text-sm font-medium text-foreground">
+          <div className="bg-background/90 px-3 py-1 text-sm font-medium text-foreground rounded-lg">
             {location.priceRange}
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-5 space-y-3">
+      <div className="p-6 space-y-4">
         {/* Header */}
         <div>
-          <h3 className="text-lg font-semibold text-foreground mb-1">
+          <h3 className="text-xl font-bold text-foreground mb-2 line-clamp-1 group-hover:text-primary transition-colors">
             {location.name}
           </h3>
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1">
-              <MapPin className="w-4 h-4" />
-              {location.city}
+            <div className="flex items-center gap-1.5">
+              <MapPin className="w-4 h-4 text-primary" />
+              <span className="font-medium">{location.city}</span>
             </div>
-            <div className="flex items-center gap-1">
-              <Users className="w-4 h-4" />
-              {location.capacity} ospiti
+            <div className="flex items-center gap-1.5">
+              <Users className="w-4 h-4 text-primary" />
+              <span className="font-medium">{location.capacity} ospiti</span>
             </div>
           </div>
         </div>
 
         {/* Rating */}
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 bg-yellow-50 dark:bg-yellow-900/20 px-3 py-1.5 rounded-full">
             <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-            <span className="text-sm font-medium text-foreground">{location.rating}</span>
+            <span className="text-sm font-bold text-yellow-700 dark:text-yellow-300">{location.rating}</span>
           </div>
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-muted-foreground font-medium">
             ({location.reviewCount} recensioni)
           </span>
         </div>
 
         {/* Description */}
-        <p className="text-sm text-muted-foreground line-clamp-2">
+        <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
           {location.description}
         </p>
 
@@ -233,13 +233,13 @@ export const LocationCard = ({ location, onClick, variant = 'vertical' }: Locati
           {location.features.slice(0, 2).map((feature, index) => (
             <span 
               key={index}
-              className="text-xs px-2 py-1 bg-secondary/50 text-secondary-foreground rounded-md"
+              className="text-xs px-3 py-1.5 bg-primary/10 text-primary rounded-full font-medium border border-primary/20"
             >
               {feature}
             </span>
           ))}
           {location.features.length > 2 && (
-            <span className="text-xs px-2 py-1 bg-secondary/50 text-secondary-foreground rounded-md">
+            <span className="text-xs px-3 py-1.5 bg-muted/60 text-muted-foreground rounded-full font-medium">
               +{location.features.length - 2} altro
             </span>
           )}
@@ -247,7 +247,7 @@ export const LocationCard = ({ location, onClick, variant = 'vertical' }: Locati
 
         {/* CTA Button */}
         <Button 
-          className="btn-secondary w-full mt-4"
+          className="w-full mt-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
           onClick={(e) => {
             e.stopPropagation();
             handleCardClick();
