@@ -162,7 +162,15 @@ All colors MUST be HSL.
 
   /* Location Cards */
   .location-card {
-    @apply glass-card-hover overflow-hidden;
+    @apply glass-card-hover overflow-hidden min-h-[420px];
+  }
+
+  .location-card img {
+    @apply transition-transform duration-500 ease-out;
+  }
+
+  .location-card:hover img {
+    @apply scale-105;
   }
 
   /* Verified Badge */
@@ -177,5 +185,20 @@ All colors MUST be HSL.
 
   .text-section {
     @apply text-2xl md:text-3xl font-light tracking-tight;
+  }
+
+  /* Mobile responsive utilities */
+  .mobile-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6;
+  }
+
+  /* Smooth transitions */
+  .smooth-transition {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  /* Consistent spacing */
+  .section-padding {
+    @apply px-4 py-8 sm:px-6 sm:py-12 lg:px-8;
   }
 }
