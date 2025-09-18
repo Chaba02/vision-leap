@@ -5,40 +5,29 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { tunisianCities, venueTypes } from "@/data/locations";
+import { SearchFilters, VenueType, City, PriceRange, CapacityRange } from "@/types/search";
+import { serializeFiltersToURL } from "@/lib/search-utils";
 
 interface SearchBarProps {
   onSearch: (filters: SearchFilters) => void;
 }
 
-export interface SearchFilters {
-  city: string;
-  venueType: string;
-  capacity: string;
-  priceRange: string;
-  date: string;
-  features: string[];
-}
-
 export const SearchBar = ({ onSearch }: SearchBarProps) => {
   const navigate = useNavigate();
   const [filters, setFilters] = useState<SearchFilters>({
-    city: "",
-    venueType: "",
-    capacity: "",
-    priceRange: "",
-    date: "",
+    query: '',
+    city: City.ALL,
+    venueType: VenueType.ALL,
+    capacity: CapacityRange.ALL,
+    priceRange: PriceRange.ALL,
+    date: '',
     features: [],
+    sortBy: 'relevance' as any
   });
 
   const handleSearch = () => {
-    // Navigate to search page with filters as URL parameters
-    const searchParams = new URLSearchParams();
-    Object.entries(filters).forEach(([key, value]) => {
-      if (value && value !== 'all') {
-        searchParams.set(key, value);
-      }
-    });
-    
+    // Navigate to search page with standardized URL parameters
+    const searchParams = serializeFiltersToURL(filters);
     navigate(`/search?${searchParams.toString()}`);
     
     // Also call the onSearch callback for backward compatibility
@@ -46,19 +35,19 @@ export const SearchBar = ({ onSearch }: SearchBarProps) => {
   };
 
   const priceRanges = [
-    "0-2000",
-    "2000-3500", 
-    "3500-5000",
-    "5000-7000",
-    "7000-"
+    { value: PriceRange.BUDGET, label: "Fino a €2000" },
+    { value: PriceRange.MEDIUM, label: "€2000 - €5000" },
+    { value: PriceRange.PREMIUM, label: "€5000 - €7000" },
+    { value: PriceRange.LUXURY, label: "€7000 - €10000" },
+    { value: PriceRange.ULTRA_LUXURY, label: "€10000+" }
   ];
 
   const capacityRanges = [
-    "0-50",
-    "50-100",
-    "100-150", 
-    "150-200",
-    "200-"
+    { value: CapacityRange.INTIMATE, label: "Fino a 50 ospiti" },
+    { value: CapacityRange.SMALL, label: "50-100 ospiti" },
+    { value: CapacityRange.MEDIUM, label: "100-200 ospiti" },
+    { value: CapacityRange.LARGE, label: "200-500 ospiti" },
+    { value: CapacityRange.EXTRA_LARGE, label: "500+ ospiti" }
   ];
 
   return (
@@ -71,13 +60,13 @@ export const SearchBar = ({ onSearch }: SearchBarProps) => {
               <MapPin className="w-4 h-4 text-primary" />
               Città
             </label>
-            <Select value={filters.city} onValueChange={(value) => setFilters({...filters, city: value})}>
+            <Select value={filters.city} onValueChange={(value) => setFilters({...filters, city: value as City})}>
               <SelectTrigger className="search-input">
                 <SelectValue placeholder="Tutte le città" />
               </SelectTrigger>
               <SelectContent className="glass-card border-glass-border/50">
-                <SelectItem value="all">Tutte le città</SelectItem>
-                {tunisianCities.map((city) => (
+                <SelectItem value={City.ALL}>Tutte le città</SelectItem>
+                {Object.values(City).filter(city => city !== City.ALL).map((city) => (
                   <SelectItem key={city} value={city}>{city}</SelectItem>
                 ))}
               </SelectContent>
@@ -90,13 +79,13 @@ export const SearchBar = ({ onSearch }: SearchBarProps) => {
               <Building className="w-4 h-4 text-primary" />
               Tipo
             </label>
-            <Select value={filters.venueType} onValueChange={(value) => setFilters({...filters, venueType: value})}>
+            <Select value={filters.venueType} onValueChange={(value) => setFilters({...filters, venueType: value as VenueType})}>
               <SelectTrigger className="search-input">
                 <SelectValue placeholder="Tutti i tipi" />
               </SelectTrigger>
               <SelectContent className="glass-card border-glass-border/50">
-                <SelectItem value="all">Tutti i tipi</SelectItem>
-                {venueTypes.map((type) => (
+                <SelectItem value={VenueType.ALL}>Tutti i tipi</SelectItem>
+                {Object.values(VenueType).filter(type => type !== VenueType.ALL).map((type) => (
                   <SelectItem key={type} value={type}>{type}</SelectItem>
                 ))}
               </SelectContent>
@@ -109,14 +98,14 @@ export const SearchBar = ({ onSearch }: SearchBarProps) => {
               <Users className="w-4 h-4 text-primary" />
               Ospiti
             </label>
-            <Select value={filters.capacity} onValueChange={(value) => setFilters({...filters, capacity: value})}>
+            <Select value={filters.capacity} onValueChange={(value) => setFilters({...filters, capacity: value as CapacityRange})}>
               <SelectTrigger className="search-input">
                 <SelectValue placeholder="N° ospiti" />
               </SelectTrigger>
               <SelectContent className="glass-card border-glass-border/50">
-                <SelectItem value="all">Qualsiasi</SelectItem>
+                <SelectItem value={CapacityRange.ALL}>Qualsiasi</SelectItem>
                 {capacityRanges.map((range) => (
-                  <SelectItem key={range} value={range}>{range}</SelectItem>
+                  <SelectItem key={range.value} value={range.value}>{range.label}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -128,20 +117,14 @@ export const SearchBar = ({ onSearch }: SearchBarProps) => {
               <DollarSign className="w-4 h-4 text-primary" />
               Budget
             </label>
-            <Select value={filters.priceRange} onValueChange={(value) => setFilters({...filters, priceRange: value})}>
+            <Select value={filters.priceRange} onValueChange={(value) => setFilters({...filters, priceRange: value as PriceRange})}>
               <SelectTrigger className="search-input">
                 <SelectValue placeholder="Budget" />
               </SelectTrigger>
               <SelectContent className="glass-card border-glass-border/50">
-                <SelectItem value="all">Qualsiasi</SelectItem>
+                <SelectItem value={PriceRange.ALL}>Qualsiasi</SelectItem>
                 {priceRanges.map((range) => (
-                  <SelectItem key={range} value={range}>
-                    {range === "0-2000" ? "Fino a €2000" :
-                     range === "2000-3500" ? "€2000 - €3500" :
-                     range === "3500-5000" ? "€3500 - €5000" :
-                     range === "5000-7000" ? "€5000 - €7000" :
-                     range === "7000-" ? "€7000+" : range}
-                  </SelectItem>
+                  <SelectItem key={range.value} value={range.value}>{range.label}</SelectItem>
                 ))}
               </SelectContent>
             </Select>

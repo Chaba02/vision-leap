@@ -1,15 +1,36 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Send, Sparkles, MapPin, Users, DollarSign, Calendar } from "lucide-react";
+import { Search, Send, Sparkles, MapPin, Users, DollarSign, Calendar, Settings, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SearchFilters, VenueType, City, PriceRange, CapacityRange } from "@/types/search";
+import { 
+  serializeFiltersToURL, 
+  getCityFromText, 
+  getVenueTypeFromText, 
+  getCapacityFromNumber,
+  getPriceRangeFromNumber,
+  getPriceRangeFromText,
+  getFeaturesFromText
+} from "@/lib/search-utils";
 
 const ChatGPTSearch = () => {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+  
+  // Advanced filters state
+  const [filters, setFilters] = useState<Partial<SearchFilters>>({
+    city: City.ALL,
+    venueType: VenueType.ALL,
+    capacity: CapacityRange.ALL,
+    priceRange: PriceRange.ALL,
+    features: []
+  });
+  
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Search suggestions based on query
@@ -46,28 +67,27 @@ const ChatGPTSearch = () => {
   }, [query]);
 
   const handleSearch = async (searchQuery: string = query) => {
-    if (!searchQuery.trim()) return;
+    if (!searchQuery.trim() && filters.city === City.ALL && filters.venueType === VenueType.ALL && filters.capacity === CapacityRange.ALL && filters.priceRange === PriceRange.ALL) return;
 
     setIsLoading(true);
 
-    // Parse the natural language query
-    const parsedFilters = parseSearchQuery(searchQuery);
+    // Combine parsed filters from query with manual advanced filters
+    const parsedFilters = searchQuery.trim() ? parseSearchQuery(searchQuery) : {};
+    const combinedFilters: Partial<SearchFilters> = {
+      ...parsedFilters,
+      // Advanced filters override parsed ones if they're not ALL
+      city: filters.city !== City.ALL ? filters.city : parsedFilters.city || City.ALL,
+      venueType: filters.venueType !== VenueType.ALL ? filters.venueType : parsedFilters.venueType || VenueType.ALL,
+      capacity: filters.capacity !== CapacityRange.ALL ? filters.capacity : parsedFilters.capacity || CapacityRange.ALL,
+      priceRange: filters.priceRange !== PriceRange.ALL ? filters.priceRange : parsedFilters.priceRange || PriceRange.ALL,
+      features: [...(filters.features || []), ...(parsedFilters.features || [])]
+    };
 
     // Simulate AI processing delay
     await new Promise(resolve => setTimeout(resolve, 800));
 
-    // Navigate to search page with parsed filters
-    const searchParams = new URLSearchParams();
-    Object.entries(parsedFilters).forEach(([key, value]) => {
-      if (value && value !== City.ALL && value !== VenueType.ALL && value !== PriceRange.ALL && value !== CapacityRange.ALL && value !== '') {
-        if (Array.isArray(value) && value.length > 0) {
-          searchParams.set(key, value.join(','));
-        } else if (!Array.isArray(value)) {
-          searchParams.set(key, String(value));
-        }
-      }
-    });
-
+    // Navigate to search page with standardized URL parameters
+    const searchParams = serializeFiltersToURL(combinedFilters);
     navigate(`/search?${searchParams.toString()}`);
     setIsLoading(false);
   };
@@ -75,60 +95,15 @@ const ChatGPTSearch = () => {
   const parseSearchQuery = (query: string): Partial<SearchFilters> => {
     const lowerQuery = query.toLowerCase();
     const filters: Partial<SearchFilters> = {
-      city: City.ALL,
-      venueType: VenueType.ALL,
+      // DON'T include query parameter in URL - only parsed filters
+      city: getCityFromText(query),
+      venueType: getVenueTypeFromText(query),
       priceRange: PriceRange.ALL,
       capacity: CapacityRange.ALL,
-      features: []
+      features: getFeaturesFromText(query)
     };
 
-    console.log('🔍 Parsing search query:', query);
-
-    // Parse city with normalized enum values
-    const cityMappings: Record<string, City> = {
-      'tunisi': City.TUNISI,
-      'hammamet': City.HAMMAMET,
-      'sousse': City.SOUSSE,
-      'djerba': City.DJERBA,
-      'monastir': City.MONASTIR,
-      'sfax': City.SFAX,
-      'mahdia': City.MAHDIA,
-      'tozeur': City.TOZEUR,
-      'tabarka': City.TABARKA,
-      'kairouan': City.KAIROUAN,
-      'bizerte': City.BIZERTE,
-      'sidi bou said': City.SIDI_BOU_SAID,
-      'sidi bou': City.SIDI_BOU_SAID
-    };
-
-    for (const [key, value] of Object.entries(cityMappings)) {
-      if (lowerQuery.includes(key)) {
-        filters.city = value;
-        console.log('🏙️ City detected:', value);
-        break;
-      }
-    }
-
-    // Parse venue type with normalized enum values
-    const venueMappings: Record<string, VenueType> = {
-      'villa': VenueType.VILLA,
-      'resort': VenueType.RESORT,
-      'hotel': VenueType.HOTEL,
-      'riad': VenueType.RIAD,
-      'palazzo': VenueType.PALAZZO,
-      'palace': VenueType.PALAZZO,
-      'ristorante': VenueType.RESTAURANT
-    };
-
-    for (const [key, value] of Object.entries(venueMappings)) {
-      if (lowerQuery.includes(key)) {
-        filters.venueType = value;
-        console.log('🏢 Venue type detected:', value);
-        break;
-      }
-    }
-
-    // Parse capacity with normalized enum values
+    // Parse capacity from numbers in text
     const capacityPatterns = [
       /(\d+)\s*(?:persone|ospiti|invitati|guests?)/,
       /per\s*(\d+)/,
@@ -140,116 +115,60 @@ const ChatGPTSearch = () => {
       const match = lowerQuery.match(pattern);
       if (match) {
         const capacity = parseInt(match[1]);
-        if (capacity <= 50) filters.capacity = CapacityRange.INTIMATE;
-        else if (capacity <= 100) filters.capacity = CapacityRange.SMALL;
-        else if (capacity <= 200) filters.capacity = CapacityRange.MEDIUM;
-        else if (capacity <= 500) filters.capacity = CapacityRange.LARGE;
-        else filters.capacity = CapacityRange.EXTRA_LARGE;
-        console.log('👥 Capacity detected:', capacity, '->', filters.capacity);
+        filters.capacity = getCapacityFromNumber(capacity);
         break;
       }
     }
 
-    // Parse price with normalized enum values
+    // Parse numerical price ranges 
     const pricePatterns = [
-      { pattern: /sotto\s*(\d+)/, handler: (price: number) => {
-        if (price <= 2000) return PriceRange.BUDGET;
-        if (price <= 5000) return PriceRange.MEDIUM;
-        if (price <= 7000) return PriceRange.PREMIUM;
-        if (price <= 10000) return PriceRange.LUXURY;
-        return PriceRange.ULTRA_LUXURY;
-      }},
-      { pattern: /meno\s*di\s*(\d+)/, handler: (price: number) => {
-        if (price <= 2000) return PriceRange.BUDGET;
-        if (price <= 5000) return PriceRange.MEDIUM;
-        if (price <= 7000) return PriceRange.PREMIUM;
-        if (price <= 10000) return PriceRange.LUXURY;
-        return PriceRange.ULTRA_LUXURY;
-      }},
-      { pattern: /fino\s*a\s*(\d+)/, handler: (price: number) => {
-        if (price <= 2000) return PriceRange.BUDGET;
-        if (price <= 5000) return PriceRange.MEDIUM;
-        if (price <= 7000) return PriceRange.PREMIUM;
-        if (price <= 10000) return PriceRange.LUXURY;
-        return PriceRange.ULTRA_LUXURY;
-      }}
+      { pattern: /sotto\s*(\d+)/, handler: getPriceRangeFromNumber },
+      { pattern: /meno\s*di\s*(\d+)/, handler: getPriceRangeFromNumber },
+      { pattern: /fino\s*a\s*(\d+)/, handler: getPriceRangeFromNumber }
     ];
 
     for (const { pattern, handler } of pricePatterns) {
       const match = lowerQuery.match(pattern);
       if (match) {
         filters.priceRange = handler(parseInt(match[1]));
-        console.log('💰 Price range detected:', filters.priceRange);
         break;
       }
     }
 
-    // Parse qualitative price terms with enum values
-    if (lowerQuery.includes('economica') || lowerQuery.includes('economico') || lowerQuery.includes('budget')) {
-      filters.priceRange = PriceRange.BUDGET;
-      console.log('💰 Price detected: economica -> BUDGET');
-    } else if (lowerQuery.includes('media') || lowerQuery.includes('medio')) {
-      filters.priceRange = PriceRange.MEDIUM;
-      console.log('💰 Price detected: media -> MEDIUM');
-    } else if (lowerQuery.includes('lusso') || lowerQuery.includes('di lusso') || lowerQuery.includes('premium')) {
-      filters.priceRange = PriceRange.PREMIUM;
-      console.log('💰 Price detected: lusso -> PREMIUM');
-    } else if (lowerQuery.includes('ultra lusso') || lowerQuery.includes('ultra-lusso')) {
-      filters.priceRange = PriceRange.ULTRA_LUXURY;
-      console.log('💰 Price detected: ultra lusso -> ULTRA_LUXURY');
-    } else if (lowerQuery.includes('luxury')) {
-      filters.priceRange = PriceRange.LUXURY;
-      console.log('💰 Price detected: luxury -> LUXURY');
+    // Parse qualitative price terms if no numerical price found
+    if (filters.priceRange === PriceRange.ALL) {
+      filters.priceRange = getPriceRangeFromText(query);
     }
 
-    // Parse features with standardized names matching SearchFilters
-    const featureMappings: Record<string, string> = {
-      'vista mare': 'Vista mare panoramica',
-      'spiaggia': 'Spiaggia privata',
-      'piscina': 'Piscina privata',
-      'giardino': 'Giardini curati',
-      'parcheggio': 'Parcheggio privato',
-      'catering': 'Servizio catering',
-      'wifi': 'WiFi gratuito',
-      'tradizionale': 'Architettura tradizionale',
-      'moderno': 'Design moderno',
-      'storico': 'Palazzo storico',
-      'intimo': 'Atmosfera romantica',
-      'romantico': 'Atmosfera romantica',
-      'cortile': 'Cortile interno',
-      'terrazza': 'Terrazza privata',
-      'panoramica': 'Vista panoramica',
-      'musica': 'Sistema audio/video',
-      'audio': 'Sistema audio/video',
-      'fotografia': 'Aree fotografiche',
-      'foto': 'Aree fotografiche'
-    };
 
-    const detectedFeatures: string[] = [];
-    for (const [key, value] of Object.entries(featureMappings)) {
-      if (lowerQuery.includes(key)) {
-        detectedFeatures.push(value);
-        console.log('✨ Feature detected:', value);
-      }
-    }
-    filters.features = detectedFeatures;
-
-    // Special cases for capacity
+    // Special cases for capacity (override numerical detection)
     if (lowerQuery.includes('intimo') || lowerQuery.includes('piccolo')) {
       filters.capacity = CapacityRange.INTIMATE;
-      console.log('👥 Special case: intimo/piccolo -> INTIMATE');
     } else if (lowerQuery.includes('grande') || lowerQuery.includes('molti ospiti')) {
       filters.capacity = CapacityRange.LARGE;
-      console.log('👥 Special case: grande/molti ospiti -> LARGE');
     }
-
-    console.log('🎯 Final parsed filters:', filters);
     return filters;
   };
 
   const handleSuggestionClick = (suggestion: string) => {
     setQuery(suggestion);
     handleSearch(suggestion);
+  };
+
+  // Advanced filters handlers
+  const updateFilter = <K extends keyof SearchFilters>(key: K, value: SearchFilters[K]) => {
+    setFilters(prev => ({ ...prev, [key]: value }));
+  };
+
+  const clearFilters = () => {
+    setFilters({
+      city: City.ALL,
+      venueType: VenueType.ALL,
+      capacity: CapacityRange.ALL,
+      priceRange: PriceRange.ALL,
+      features: []
+    });
+    setQuery("");
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -360,25 +279,171 @@ const ChatGPTSearch = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-wrap justify-center gap-3 mt-6"
         >
-          {[
-            { icon: MapPin, label: "Per città", query: "Villa a Hammamet" },
-            { icon: Users, label: "Per ospiti", query: "Location per 100 ospiti" },
-            { icon: DollarSign, label: "Per budget", query: "Location economica sotto 3000€" },
-            { icon: Calendar, label: "Per tipo", query: "Resort di lusso" }
-          ].map((filter, index) => (
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { icon: MapPin, label: "Per città", query: "Villa a Hammamet" },
+              { icon: Users, label: "Per ospiti", query: "Location per 100 ospiti" },
+              { icon: DollarSign, label: "Per budget", query: "Location economica sotto 3000€" },
+              { icon: Calendar, label: "Per tipo", query: "Resort di lusso" }
+            ].map((filter, index) => (
+              <motion.button
+                key={filter.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.7 + index * 0.1 }}
+                onClick={() => handleSuggestionClick(filter.query)}
+                className="flex items-center gap-2 px-4 py-2 glass-card rounded-full text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-200 group"
+              >
+                <filter.icon className="w-4 h-4 group-hover:text-primary transition-colors" />
+                {filter.label}
+              </motion.button>
+            ))}
+            
+            {/* Advanced Filters Toggle */}
             <motion.button
-              key={filter.label}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.7 + index * 0.1 }}
-              onClick={() => handleSuggestionClick(filter.query)}
-              className="flex items-center gap-2 px-4 py-2 glass-card rounded-full text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-200 group"
+              transition={{ delay: 1.1 }}
+              onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+              className={`flex items-center gap-2 px-4 py-2 glass-card rounded-full text-sm transition-all duration-200 group ${
+                showAdvancedFilters 
+                  ? 'text-primary border-primary/30 bg-primary/5' 
+                  : 'text-muted-foreground hover:text-foreground hover:bg-white/5'
+              }`}
             >
-              <filter.icon className="w-4 h-4 group-hover:text-primary transition-colors" />
-              {filter.label}
+              <Settings className="w-4 h-4 group-hover:text-primary transition-colors" />
+              Filtri Avanzati
             </motion.button>
-          ))}
+          </div>
         </motion.div>
+
+        {/* Advanced Filters Panel */}
+        <AnimatePresence>
+          {showAdvancedFilters && (
+            <motion.div
+              initial={{ opacity: 0, y: -10, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: "auto" }}
+              exit={{ opacity: 0, y: -10, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mt-6 glass-card rounded-2xl border border-glass-border/30 p-6 overflow-hidden"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-medium">Filtri Avanzati</h3>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={clearFilters}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  <X className="w-4 h-4 mr-2" />
+                  Pulisci
+                </Button>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {/* City Filter */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-muted-foreground">Città</label>
+                  <Select value={filters.city} onValueChange={(value) => updateFilter('city', value as City)}>
+                    <SelectTrigger className="glass-card border-glass-border">
+                      <SelectValue placeholder="Seleziona città" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value={City.ALL}>Tutte le città</SelectItem>
+                      <SelectItem value={City.TUNISI}>Tunisi</SelectItem>
+                      <SelectItem value={City.HAMMAMET}>Hammamet</SelectItem>
+                      <SelectItem value={City.SOUSSE}>Sousse</SelectItem>
+                      <SelectItem value={City.DJERBA}>Djerba</SelectItem>
+                      <SelectItem value={City.MONASTIR}>Monastir</SelectItem>
+                      <SelectItem value={City.SFAX}>Sfax</SelectItem>
+                      <SelectItem value={City.MAHDIA}>Mahdia</SelectItem>
+                      <SelectItem value={City.TOZEUR}>Tozeur</SelectItem>
+                      <SelectItem value={City.TABARKA}>Tabarka</SelectItem>
+                      <SelectItem value={City.KAIROUAN}>Kairouan</SelectItem>
+                      <SelectItem value={City.BIZERTE}>Bizerte</SelectItem>
+                      <SelectItem value={City.SIDI_BOU_SAID}>Sidi Bou Said</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Venue Type Filter */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-muted-foreground">Tipo Location</label>
+                  <Select value={filters.venueType} onValueChange={(value) => updateFilter('venueType', value as VenueType)}>
+                    <SelectTrigger className="glass-card border-glass-border">
+                      <SelectValue placeholder="Tipo location" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value={VenueType.ALL}>Tutti i tipi</SelectItem>
+                      <SelectItem value={VenueType.VILLA}>Villa</SelectItem>
+                      <SelectItem value={VenueType.RESORT}>Resort</SelectItem>
+                      <SelectItem value={VenueType.HOTEL}>Hotel</SelectItem>
+                      <SelectItem value={VenueType.RIAD}>Riad</SelectItem>
+                      <SelectItem value={VenueType.PALAZZO}>Palazzo</SelectItem>
+                      <SelectItem value={VenueType.RESTAURANT}>Ristorante</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Capacity Filter */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-muted-foreground">Capacità</label>
+                  <Select value={filters.capacity} onValueChange={(value) => updateFilter('capacity', value as CapacityRange)}>
+                    <SelectTrigger className="glass-card border-glass-border">
+                      <SelectValue placeholder="Numero ospiti" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value={CapacityRange.ALL}>Qualsiasi capacità</SelectItem>
+                      <SelectItem value={CapacityRange.INTIMATE}>Intimo (fino a 50)</SelectItem>
+                      <SelectItem value={CapacityRange.SMALL}>Piccolo (50-100)</SelectItem>
+                      <SelectItem value={CapacityRange.MEDIUM}>Medio (100-200)</SelectItem>
+                      <SelectItem value={CapacityRange.LARGE}>Grande (200-500)</SelectItem>
+                      <SelectItem value={CapacityRange.EXTRA_LARGE}>Extra Large (500+)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Price Range Filter */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-muted-foreground">Budget</label>
+                  <Select value={filters.priceRange} onValueChange={(value) => updateFilter('priceRange', value as PriceRange)}>
+                    <SelectTrigger className="glass-card border-glass-border">
+                      <SelectValue placeholder="Range di prezzo" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value={PriceRange.ALL}>Qualsiasi budget</SelectItem>
+                      <SelectItem value={PriceRange.BUDGET}>Budget (€500-2.000)</SelectItem>
+                      <SelectItem value={PriceRange.MEDIUM}>Medio (€2.000-5.000)</SelectItem>
+                      <SelectItem value={PriceRange.PREMIUM}>Premium (€5.000-7.000)</SelectItem>
+                      <SelectItem value={PriceRange.LUXURY}>Lusso (€7.000-10.000)</SelectItem>
+                      <SelectItem value={PriceRange.ULTRA_LUXURY}>Ultra Lusso (€10.000+)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              {/* Apply Filters Button */}
+              <div className="flex justify-center mt-6">
+                <Button
+                  onClick={() => handleSearch()}
+                  className="btn-primary px-8 py-3"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      className="w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"
+                    />
+                  ) : (
+                    <Search className="w-5 h-5 mr-2" />
+                  )}
+                  Cerca con Filtri
+                </Button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* AI Processing Indicator */}
         <AnimatePresence>

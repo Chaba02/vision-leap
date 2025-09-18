@@ -1,19 +1,15 @@
+/**
+ * Main App component - handles routing and global providers
+ */
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import Search from "./pages/Search";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import LocationDetail from "./pages/LocationDetail";
-import Booking from "./pages/Booking";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import Reviews from "./pages/Reviews";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import SearchPage from "./pages/SearchPage";
+import AuthPage from "./pages/AuthPage";
 
 const queryClient = new QueryClient();
 
@@ -24,17 +20,16 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/location/:id" element={<LocationDetail />} />
-          <Route path="/booking/:id" element={<Booking />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/reviews" element={<Reviews />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
+          {/* Redirect root to home */}
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          
+          {/* Main routes */}
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/auth" element={<AuthPage />} />
+          
+          {/* Catch all - redirect to home */}
+          <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

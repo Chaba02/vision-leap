@@ -375,7 +375,7 @@ const SearchSystem = ({ onSearchFocus, className = "" }: SearchSystemProps) => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 right-0 mt-2 z-[100] glass-card rounded-2xl border border-glass-border/30 shadow-2xl max-h-64 overflow-auto"
+              className="absolute top-full left-0 right-0 mt-2 z-[55] glass-card bg-white/95 backdrop-blur-xl rounded-2xl border border-glass-border/30 shadow-2xl max-h-64 overflow-auto"
             >
               <div className="p-4">
                 <div className="text-sm font-medium text-muted-foreground mb-3">
@@ -416,7 +416,7 @@ const SearchSystem = ({ onSearchFocus, className = "" }: SearchSystemProps) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="absolute top-full left-0 right-0 mt-2 glass-card rounded-2xl border border-glass-border/30 p-4 z-50"
+              className="absolute top-full left-0 right-0 mt-2 glass-card bg-white/95 backdrop-blur-xl rounded-2xl border border-glass-border/30 p-4 z-[55]"
             >
               <div className="flex items-center gap-3">
                 <motion.div
